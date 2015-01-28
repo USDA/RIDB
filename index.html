@@ -1,0 +1,4036 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>RIDB API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["Example Responses"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="Example Responses">Example Responses</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://ridb-dev.nsitellc.com/?action=register'>Sign Up for a RIDB Developer Key</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the Recreation Information Database (RIDB) Application Programming Interface (API). This API is provided for the purpose of accessing RIDB API endpoints, containing information for federal recreation areas, facilities, campsites, tours, and permits. </p>
+
+<p>Federal agencies provide and are responsible for the quality of data contained in the RIDB. Some data may be missing or incomplete. For example, some latitudes and longitudes may be blank. Please be mindful of this when searching for something in particular or applying proximity filters.</p>
+
+<p>Please contribute to our Github <a href='https://github.com/USDA/RIDB/issues'>issue tracker</a> if you have any questions or concerns.</p>
+
+          <h1 id='authentication'>Authentication</h1>
+<p>The RIDB API uses keys to allow access. Registration is free and your key is available to you immediately upon registration. You can register for an API key <a href="httpx://ridb-dev.nsitellc.com/?action=register">here</a>.</p>
+
+<p>The RIDB API expects for the key to be included in all API requests to the server in an HTTP header that looks like the following: <code class="prettyprint">apikey:thisIsMyKey</code></p>
+
+<p><aside class="notice">
+You must replace <code class="prettyprint">thisIsMyKey</code> with your personal API key found on RIDB your profile page.
+</aside></p>
+
+          <h1 id='get-all-rec-area-data'>Get All Rec Area Data</h1>
+<p>The RIDB is comprised of several data points, primarily recreation areas, facilities, campsites, tours, and permit entrances. While we offer many API endpoints to make this data available for download, you may be asking yourself &ldquo;How do I download the entire RIDB data set?&rdquo; This functionality is currently in development. We will be providing the ability to download the entire RIDB data set in one file. Download formats supported will be JSON, XML, and a package of CSV files.</p>
+
+          <h1 id='organizations'>Organizations</h1>
+<p>RIDB organizations are the federal agencies that provide RIDB data. </p>
+<h2 id='get-all-organizations'>Get All Organizations</h2>
+<blockquote>
+<p>Example organization JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"OrgAbbrevName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPS"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgJurisdictionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Federal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Department of the Interior"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.nps.gov"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgImageURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nps.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgID"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Park Service"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all organizations.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-organization'>Get a Specific Organization</h2>
+<p>This endpoint retrieves a specific organization.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{organizationID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>organizationID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the organization ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-recreation-areas-for-a-specific-organization'>Get All Recreation Areas for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/recareas</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orgid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the organization ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of 2 character state codes</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+</tr>
+<tr>
+<td>lastupdated</td>
+<td>date</td>
+<td>optional</td>
+<td>return all records modified since this date</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-recreation-area-for-a-specific-organization'>Get a Specific Recreation Area for a Specific Organization</h2><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/recareas/{recareaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orgid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the organization ID</td>
+</tr>
+<tr>
+<td>recareaid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-facilites-for-a-specific-organization'>Get All Facilites for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/facilities</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orgid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the organization ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of 2 character state codes</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+</tr>
+<tr>
+<td>lastupdated</td>
+<td>date</td>
+<td>optional</td>
+<td>return all records modified since this date</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-facility-for-a-specific-organization'>Get a Specific Facility for a Specific Organization</h2><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/facilities/{facilityID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orgid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the organization ID</td>
+</tr>
+<tr>
+<td>facilityid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='recreation-areas'>Recreation Areas</h1>
+<p>Recreation areas are large tracts of federal land for the purpose of, you guessed it, recreating! Recreation areas have many distinguishing characteristics (attributes) ranging from addresses, organizations, links, media links, activities, etc. Recreation areas can contain one to many child facilities. Recreation area examples are Yosemite National Park and the Aldo Leopold Wilderness.</p>
+<h2 id='get-all-recreation-areas'>Get All Recreation Areas</h2>
+<blockquote>
+<p>Example recreation area JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"RecAreaMapURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1126</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaReservationURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Upper Colorado River Recreation Management Area"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This 80-mile corridor follows the Colorado River from near its headwaters to Glenwood Canyon. Public lands along the corridor offer visitors outstanding opportunities for float boating, fishing and scenic driving."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kfo_webmail@blm.gov&lt;p&gt; BLM_CO_SI_CRVFO_Webmail@blm.gov"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">39.48285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"StayLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"October, 24 2012 11:36:32"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1708</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-107.9187</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaDirections"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The river corridor lies between Steamboat Springs and Vail, Colorado. River access is provided by I-70 and several highways and county roads. Kremmling, Dotsero, and the White River National Forest are a 2-3 hour drive from the Denver Metropolitan area."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970-724-3000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgRecAreaID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all recreation areas.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Latitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Longitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Distance (in miles) by which to include search results</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of 2 character state codes</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+</tr>
+<tr>
+<td>lastupdated</td>
+<td>date</td>
+<td>optional</td>
+<td>return all records modified since this date</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-recreation-area'>Get a Specific Recreation Area</h2>
+<p>This endpoint retrieves a specific recreation area.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-facilities'>Recreation Area Facilities</h2>
+<blockquote>
+<p>Example recreation area facility JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"FacilityEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityLongitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1090</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This recreation area is part of &lt;a href=http://www.recreation.gov/recreationalAreaDetails.do?contractCode=NRSO&amp;recAreaId=463&amp;agencyCode=130&gt;Alamo Lake&lt;/a&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityLatitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityMapURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityReservationURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityDirections"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alamo State Park"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityUseFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"StayLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 25 2013 14:26:12"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityAdaAccess"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LegacyFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5459596</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">247799</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all facilities within a specific recreation area.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recareaID}/facilities/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Latitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Longitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Distance (in miles) by which to include search results</td>
+</tr>
+<tr>
+<td>lastupdated</td>
+<td>date</td>
+<td>optional</td>
+<td>optional</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific facility within a specific recreation area.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recareaID}/facilities/{facilityid}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-addresses'>Recreation Area Addresses</h2>
+<blockquote>
+<p>Example recreation area address JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"PostalCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">95630</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1045</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaAddressID"</span><span class="p">:</span><span class="w"> </span><span class="mi">302</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"July, 08 2004 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaID"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressStateCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Folsom"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaStreetAddress1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bureau of Land Management"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaAddressType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaStreetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Folsum Field Office"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaStreetAddress3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"63 Natoma Street"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all recreation area addresses. Each recreation area must have at least one state and country listed.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareaaddresses/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves addresses for a specific recreation area.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/recareaaddresses/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific recreation area address.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareaaddresses/{recAreaAddressID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaAddressID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area address ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific recreation area address.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/recareaaddresses/{recAreaAddressID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>recAreaAddressID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area address ID</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-media'>Recreation Area Media</h2>
+<blockquote>
+<p>Example recreation area media JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RecArea"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1708</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EmbedCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"MediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ridb.recreation.gov/images/772.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Upper Colorado River "</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all media for a specific recreation area. See <a href="#media">media</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific recreation area media item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>entityMediaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the media entity ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific recreation area media item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>entityMediaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the media entity ID</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-links'>Recreation Area Links</h2>
+<blockquote>
+<p>Example recreation area link JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RecArea"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1708</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LinkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Official Web Site"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.blm.gov/co/st/en/fo/kfo/recreation_opportunities/rafting.html"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Upper Colorado River "</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves links for a specific recreation area. See <a href="#links">links</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific recreation area link item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/{entityLinkID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>entityLinkID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the entity link ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific recreation area link item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/{entityLinkID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>entityLinkID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the entity link ID</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-events'>Recreation Area Events</h2>
+<blockquote>
+<p>Example recreation area event JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EventDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wildlife and Forestry Festival for National Hunting and Fishing Day, including sports events"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventID"</span><span class="p">:</span><span class="w"> </span><span class="mi">10856</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventAgeGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1090</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventADAAccess"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hunting and Fishing Festival"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventComments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEndDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 28 2013 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFrequencyRateDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 25 2013 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventScopeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventRegistrationRequired"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventStartDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 28 2013 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorClassType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SubmittedID"</span><span class="p">:</span><span class="w"> </span><span class="mi">632</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves events for a specific recreation area. See <a href="#events">events</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific recreation area event item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/{entityEventID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>entityEventID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the entity event ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific recreation area event item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/{eventID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>eventID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the event ID</td>
+</tr>
+</tbody></table>
+<h2 id='recreation-area-activities'>Recreation Area Activities</h2>
+<blockquote>
+<p>Example recreation area activity JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"ActivityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityParentID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIKING"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves activities for a specific recreation area. See <a href="#activities">activities</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific recreation area activity item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/{activityID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>activityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the activity ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific recreation area activity item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/{activityID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recAreaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the recreation area ID</td>
+</tr>
+<tr>
+<td>activityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the activity ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='facilities'>Facilities</h1>
+<p>Facilities are points of interest within recreations areas. Facilities can also &ldquo;stand on their own&rdquo; without a parent recreation area. Facilites can also be comprised of or more child facilities. Examples are a ranger station, hotel, campground or trail. Facilities can also be areas within larger facilities. 
+Example is Alamo National Park that resides within the Alamo Lake recreation area. Facilities can also be reservable or non-reservable.</p>
+<h2 id='get-all-facilities'>Get All Facilities</h2>
+<blockquote>
+<p>Example facility JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"FacilityEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Library.Bush@nara.gov"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-96.331389</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1008</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Like the other Presidential Libraries, the George Bush Presidential Library and Museum is also a research institution, totally integrated into the academic environment of Texas A&amp;M University.&lt;p&gt; \r\nThe Bush Library's collections include 38,000,000 pages of official and personal papers, 1,000,000 photographs, 2,500 hours of videotape, and 70,000 museum objects. These rich primary sources document George Bush's distinguished public career as congressman, Ambassador to the United Nations, Chief of the U.S. Liaison Office in China, Chairman of the Republican National Committee, Director of the Central Intelligence Agency, Vice-President, and President. Included in the Museum's exhibits are items ranging from a 1925 film of George Bush's first steps in Kennebunkport, Maine, to records and memorabilia from his tenure as the 41st President of the United States. &lt;p&gt;\r\nThe Museum also contains a special section is dedicated to former First Lady Barbara Bush and a classroom designed specifically for students from kindergarten through high school. &lt;p&gt;\r\nOperated by the National Archives and Records Administration (NARA), the George Bush Presidential Library and Museum is the tenth Presidential Library in the United States. The library is located on the Texas A&amp;M University campus in College Station, Texas. \r\n"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.612222</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Library"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"979-691-4000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityMapURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://bushlibrary.tamu.edu/map.html"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityReservationURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityDirections"</span><span class="p">:</span><span class="w"> </span><span class="s2">"See the map at &lt;a href=\"http://bushlibrary.tamu.edu/map.html\"&gt;bushlibrary.tamu.edu/map.html&lt;/a&gt;\r\n&lt;p&gt;\r\n&lt;u&gt;From Houston&lt;/u&gt;: Take I-45 north to Conroe. In Conroe, take Hwy 105 west to Navasota. From Navasota, Hwy 6 north will go to Bryan / College Station. Take the Business 6 / Texas Avenue exit (LEFT exit). At the second light, make a left onto FM 2818 and go approximately four miles to George Bush Drive. Make a right onto George Bush Drive. The entrance to the George Bush Library is approximately 1/4 mile on the left. Travel time: approximately two hours. \r\n&lt;br&gt;\r\n&lt;u&gt;From Dallas&lt;/u&gt;: Take I-45 south to Madisonville. Take Hwy 21 west to Bryan / College Station. At the junction of Hwy 21 and FM 2818, make a left onto FM 2818 and continue for approximately six miles to George Bush Drive. Turn left onto George Bush Drive. The entrance to the George Bush Library is approximately 1/4 mile on the left. Travel time: approximately two and one half hours. &lt;br&gt;\r\n&lt;u&gt;From Fort Worth&lt;/u&gt;:\r\nTake I-35 south to Waco. From Waco, travel south to Bryan / College Station on Hwy 6. Exit onto FM 2818 before arriving in Bryan and follow the signs to George Bush Drive. Make a left onto George Bush Drive. The entrance to the George Bush Library is approximately 1/4 mile on the left. Travel time: approximately three hours. &lt;br&gt;\r\n&lt;u&gt;From Austin&lt;/u&gt;:\r\nTake Hwy 290 east to the intersection with Hwy 21 north. Take Hwy 21 north to Bryan / College Station. At the junction with FM 2818, make a right turn on to FM 2818 and go approximately six miles to George Bush Drive. The entrance to the George Bush Library is approximately 1/4 mile on the left. Travel time: approximately one and one half hours. \r\n&lt;br&gt;\r\n&lt;u&gt;From San Antonio&lt;/u&gt;:\r\nTake I-35 north to San Marcos. From San Marcos, travel north on Hwy 21 to Bryan / College Station. At the junction with FM 2818, make a right turn on to FM 2818 and go approximately six miles to George Bush Drive. The entrance to the George Bush Library is approximately 1/4 mile on the left. Travel time: approximately three hours. \r\n\r\n."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George Bush Presidential Library and Museum"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityUseFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"StayLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"February, 26 2007 00:49:30"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityAdaAccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LegacyFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"OrgFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">200001</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all facilities.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Latitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Longitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Distance (in miles) by which to include search results</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of 2 character state codes</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>string</td>
+<td>optional</td>
+<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+</tr>
+<tr>
+<td>lastupdated</td>
+<td>date</td>
+<td>optional</td>
+<td>return all records modified since this date</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-facility'>Get a Specific Facility</h2>
+<p>This endpoint retrieves a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>optional</td>
+<td>return the full record details or compact (abbreviated) details</td>
+</tr>
+</tbody></table>
+<h2 id='facility-addresses'>Facility Addresses</h2>
+<blockquote>
+<p>Example facility address JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"FacilityAddressID"</span><span class="p">:</span><span class="w"> </span><span class="mi">10239</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PostalCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">72543</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityAddressType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressStateCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityStreetAddress1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"349 Hatchery Road"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Heber Springs"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityStreetAddress3"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityStreetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">201772</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all facility addresses. Each facility must have at least one state and country listed.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilityaddresses/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves addresses for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/facilityaddresses/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific facility address.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilityaddresses/{facilityAddressID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityAddressID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility address ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific facility address.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/facilityaddresses/{facilityAddressID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>facilityAddressID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility address ID</td>
+</tr>
+</tbody></table>
+<h2 id='facility-media'>Facility Media</h2>
+<blockquote>
+<p>Example facility media JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facility"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">203244</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EmbedCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"MediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ridb.recreation.gov/images/1.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.us"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all media for a specific facility. See <a href="#media">media</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific facility media item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>entityMediaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the media entity ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific facility media item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>entityMediaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the media entity ID</td>
+</tr>
+</tbody></table>
+<h2 id='facility-links'>Facility Links</h2>
+<blockquote>
+<p>Example facility link JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facility"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">203896</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LinkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reservation"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.dcr.state.va.us/parks/reserve.htm"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George Washington's Gristmill Online Reservation"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all links for a specific facility. See <a href="#links">links</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific facility link item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>entityLinkID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility link ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific facility link item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>entityLinkID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the link entity ID</td>
+</tr>
+</tbody></table>
+<h2 id='facility-events'>Facility Events</h2>
+<blockquote>
+<p>Example facility event JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EventDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventID"</span><span class="p">:</span><span class="w"> </span><span class="mi">10021</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventAgeGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventADAAccess"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Event"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventComments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEndDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"October, 13 2006 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFrequencyRateDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"August, 16 2005 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventScopeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventRegistrationRequired"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventStartDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"October, 12 2006 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorClassType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SubmittedID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves events for a specific facility. See <a href="#events">events</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specific facility event item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/{entityEventID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>entityEventID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the entity event ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific facility event item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/{eventID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>eventID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the event ID</td>
+</tr>
+</tbody></table>
+<h2 id='facility-activities'>Facility Activities</h2>
+<blockquote>
+<p>Example facility activity JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"ActivityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityParentID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HISTORIC &amp; CULTURAL SITE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves activities for a specific facility. See <a href="#activities">activities</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint retrieves a specificfacility activity item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/{activityID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>activityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the activity ID</td>
+</tr>
+</tbody></table>
+
+<p>Another endpoint to retrieve a specific facility activity item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/{activityID}/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>activityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the activity ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='campsites'>Campsites</h1>
+<p>Campsites are associated to parent facilities. </p>
+<h2 id='get-all-campsites'>Get All Campsites</h2>
+<blockquote>
+<p>Example campsite JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1101</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 18 2014 02:08:52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TypeOfUse"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Overnight"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CreatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"May, 02 2014 17:15:05"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CampsiteType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STANDARD NONELECTRIC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CampsiteID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CampsiteName"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Loop"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOOP C - Sites 1,2,3,4, 45-99"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CampsiteAccessible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">232446</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all campsites.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-campsite'>Get a Specific Campsite</h2>
+<p>This endpoint retrieves a specific campsite.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>campsiteID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the campsite ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-campsites-for-a-specific-facility'>Get All Campsites For a Specific Facility</h2>
+<p>This endpoint retrieves all campsites for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/campsites</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-campsite-for-a-specific-facility'>Get a Specific Campsite for a Specific Facility</h2>
+<p>This endpoint retrieves a specific campsite for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/campsites/{campsiteID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>campsiteID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the campsite ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-permitted-equipment-for-a-campsite'>Get All Permitted Equipment for a Campsite</h2>
+<p>This endpoint retrieves all permitted equipment for a campsite.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}/permittedequipment</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>campsiteID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the campsite ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-permitted-equipment-for-a-specific-campsite'>Get a Specific Permitted Equipment for a Specific Campsite</h2>
+<p>This endpoint retrieves a specific permitted equipment for a specific campsite.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}/permittedequipment/{permittedequipmentID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>campsiteID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the campsite ID</td>
+</tr>
+<tr>
+<td>permittedequipmentID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the premitted equipment ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='permit-entrances'>Permit Entrances</h1>
+<p>Permit entrances are associated to parent facilities. </p>
+<h2 id='get-all-permit-entrances'>Get All Permit Entrances</h2>
+<blockquote>
+<p>Example permit entrance JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"PermitEntranceID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"District"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gunflint District"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1101</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PermitEntranceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entry Point"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ATTRIBUTES"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Important Information"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Camping limited to designated U.S.F.S. sites."</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"CreatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"May, 02 2014 18:31:41"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grand Marais"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ZONES"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"PermitEntranceAccessible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.0625</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 18 2014 03:01:30"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PermitEntranceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duncan Lake (op)"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-90.43944444444445</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ENTITYMEDIA"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"isActive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">233396</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PermitEntranceDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Method of travel is paddle. Access is from West Bearskin Lake with a 70-rod portage to Duncan Lake and an 80-rod portage to Rose. For more information, please call the Gunflint Ranger Station at 218-387-1750."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all permit entrances.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-permit-entrance'>Get a Specific Permit Entrance</h2>
+<p>This endpoint retrieves a specific permit entrance.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permitEntranceID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the permit entrance ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-permit-entrances-for-a-specific-facility'>Get All Permit Entrances For a Specific Facility</h2>
+<p>This endpoint retrieves all permit entrances for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/permitentrances</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-permit-entrance-for-a-specific-facility'>Get a Specific Permit Entrance for a Specific Facility</h2>
+<p>This endpoint retrieves a specific permit entrance for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/permitentrances/{permitEntranceID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>permitEntranceID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the permit entrance ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-zones-for-a-specific-permit-entrance'>Get all Zones for a Specific Permit Entrance</h2>
+<p>This endpoint retrieves all zones for a specific permit entrance.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}/zones</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permitEntranceID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the permit entrance ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-zones-for-a-specific-permit-entrance'>Get all Zones for a Specific Permit Entrance</h2>
+<p>This endpoint retrieves a specific zone for a specific permit entrance.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}/zones/{zoneID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>permitEntranceID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the permit entrance ID</td>
+</tr>
+<tr>
+<td>zoneID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the zone ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='tours'>Tours</h1>
+<p>Tours are associated to parent facilities. Tours can alos be members of parent tour packages as denoted by the &ldquo;membertours&rdquo; attribute.</p>
+<h2 id='get-all-tours'>Get All Tours</h2>
+<blockquote>
+<p>Example tour JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"TourAccessible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TourDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meet a character from Mesa Verdes past! Join a knowledgeable ranger, portraying a notable figure from Mesa Verdes past, who will guide you through Cliff Place as the sun begins to set below the mesa top. This is a unique opportunity to learn about North Americas largest cliff dwelling through the eyes of the people who found, stabilized, and preserved it in the late 1800s and early 1900s."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TourID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1101</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 18 2014 03:01:30"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TourDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TourType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cliff Dwelling Tour"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ATTRIBUTES"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Directions To Tour"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"From the park entrance, drive 20 miles (32.2 km) to the stop sign. Turn left and drive 0.4 miles (0.6 km) and turn left. Drive 1.7 miles (2.7 km) to Cliff Palace. Meet the ranger on the overlook above the site at least 15 minutes in advance."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Distance (miles)"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Important Information"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Consider your physical health before joining a hike, especially if you have heart or respiratory problems, or other physical difficulties. Elevations range between 7,000 and 7,500 feet (2134m and 2286m) above sea level. You should plan for all weather possibilities because weather conditions are quite variable. Its possible to begin your hike in full sun and end with a thunderstorm or snowstorm."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long Description"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meet a character from Mesa Verdes past! Join a knowledgeable ranger, portraying a notable figure from Mesa Verdes past, who will guide you through Cliff Place as the sun begins to set below the mesa top. This is a unique opportunity to learn about North Americas largest cliff dwelling through the eyes of the people who found, stabilized, and preserved it in the late 1800s and early 1900s. &lt;br /&gt;&lt;br /&gt;This moderate 90-minute tour has an elevation change of 100 feet (30m) descending uneven stone steps and climbing four, 8- to 10-foot (2.4m to 3m) ladders. Participants will be provided an intimate, leisurely encounter with Mesa Verdes largest cliff dwelling. The tour is available from May 25, 2014 to September 4, 2014 on Sundays, Mondays, Tuesdays, Wednesdays, and Thursdays."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Num of Steps"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Physical Effort"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moderate"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tour Days / Hours Description"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sundays, Mondays, Tuesdays, Wednesdays, Thursdays"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SiteAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tour Days of Week"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SiteAttributeValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sunday"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"CreatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"May, 02 2014 18:31:41"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"MEMBERTOURS"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"ENTITYMEDIA"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">233362</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"TourName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twilight Tour"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all tours.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/tours</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-tour'>Get a Specific Tour</h2>
+<p>This endpoint retrieves a specific tour.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/tours/&lt;tourID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tourID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the tour ID</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-tours-for-a-specific-facility'>Get All Tours For a Specific Facility</h2>
+<p>This endpoint retrieves all tours for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/tours</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityid</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-tour-for-a-specific-facility'>Get a Specific Tour for a Specific Facility</h2>
+<p>This endpoint retrieves a specific tour for a specific facility.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/tours/{tourID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>facilityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the facility ID</td>
+</tr>
+<tr>
+<td>tourID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the tour ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='activities'>Activities</h1>
+<p>Activities are associated to recreation areas and facilities. Examples are climbing, boating, and camping.</p>
+<h2 id='get-all-activities'>Get All Activities</h2>
+<blockquote>
+<p>Example activity JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"ActivityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityParentID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ActivityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTO TOURING"</span><span class="w">
+</span><span class="p">}</span><span class="w">   
+</span></pre>
+
+<p>This endpoint retrieves all activities.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/activities/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+
+<p>Get a Specific Activity</p>
+
+<p>This endpoint retrieves a specific activity item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/activities/{activityID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activityID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the activity ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='events'>Events</h1>
+<p>Events are associated to either recreation areas or facilities. Examples are Salmon Festivals, Halloween in the Park, Ballon Festivals, Environmental Fairs, and Fishing tournaments.</p>
+<h2 id='get-all-events'>Get All Events</h2>
+<blockquote>
+<p>Example event JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EventDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfasdfasdfasdfaf"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventAgeGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventID"</span><span class="p">:</span><span class="w"> </span><span class="mi">10005</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventADAAccess"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test event"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventComments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFrequencyRateDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventRegistrationRequired"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorClassType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SubmittedID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventEndDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"July, 14 2004 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"July, 13 2004 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventScopeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventStartDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"July, 07 2004 00:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SponsorPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EventURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all events.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/events/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-event'>Get a Specific Event</h2>
+<p>This endpoint retrieves a specific event item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/events/{eventID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the event ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='media'>Media</h1>
+<p>Media is hyperlinks to either images or video assoicated with a recreation area, facility or campsite.</p>
+<h2 id='get-all-media'>Get All Media</h2>
+<blockquote>
+<p>Example media JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facility"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">203244</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EmbedCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"MediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ridb.recreation,.gov/images/1.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.us"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all media.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/media/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-media-item'>Get a Specific Media Item</h2>
+<p>This endpoint retrieves a specific media item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/media/{entityMediaID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entityMediaID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the media ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='links'>Links</h1>
+<p>Links are hyperlinks that provide information associated with a recreation area or facility. Link type examples are official websites, local partnerships, concessionaires, Flickr, Facebook, YouTube channels, Google+, and Twitter.</p>
+<h2 id='get-all-links'>Get All Links</h2>
+<blockquote>
+<p>Example link JSON response</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"EntityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facility"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"EntityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">203896</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LinkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reservation"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.dcr.state.va.us/parks/reserve.htm"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George Washington's Gristmill Online Reservation"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all links.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/links/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-link-item'>Get a Specific Link Item</h2>
+<p>This endpoint retrieves a specific link item.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/links/{entityLinkID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Paramater</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entityLinkID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the link ID</td>
+</tr>
+</tbody></table>
+
+          <h1 id='errors'>Errors</h1>
+<p>The RIDB API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request - Often missing a required parameter.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized - No valid API key provided.</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Request Failed - Parameters were valid but request failed.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The API requested is for administrators only TODO: need to add this error code</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found - The requested item doesn&rsquo;t exist.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a resource with an invalid method TODO: need to add this error code</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many resources! Slown down! TODO: need to add this code</td>
+</tr>
+<tr>
+<td>500, 502, 503, 504</td>
+<td>Server errors - something went wrong on the RIDB server&rsquo;s side.</td>
+</tr>
+</tbody></table>
+
+          <h1 id='pagination'>Pagination</h1>
+<p>The RIDB API uses cursor based pagination with the parameters &ldquo;offset&rdquo; and &ldquo;limit&rdquo;. </p>
+
+<ul>
+<li>offset: where in the the result set you would like the output to begin. </li>
+<li>limit: how many results you would like returend at a time (max 50).</li>
+</ul>
+
+<p><aside class="notice">
+Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-based_numbering" target="_blank">0 based</a>, meaning start your count with 0. 
+</aside></p>
+
+<p>The response body will return TOTAL_COUNT and CURRENT_COUNT. </p>
+
+<ul>
+<li>TOTAL_COUNT represents the total number of records in the entire result set. TODO: this isn&rsquo;t populated correctly yet</li>
+<li>CURRENT_COUNT represents the number of records returned in the current result set based on the offest provided or if the total result set is nearing the completion of its records.</li>
+</ul>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas?offset=100&amp;limit=25</code></p>
+
+          <h1 id='versioning'>Versioning</h1>
+<p>The RIDB API uses versions. The version is referenced in all API end point calls. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas</code></p>
+
+          <h1 id='data-dictionary'>Data Dictionary</h1><h2 id='organization'>Organization</h2>
+<p>Organization the recreation area or facility is associated to (e.g. U.S. Forest Service, National Park Service) </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OrgID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Organization ID</td>
+</tr>
+<tr>
+<td>OrgName</td>
+<td>STRING</td>
+<td>60</td>
+<td>N</td>
+<td>Full name of organization</td>
+</tr>
+<tr>
+<td>OrgAbbrevName</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Abbreviated name of the organization</td>
+</tr>
+<tr>
+<td>OrgURLAddress</td>
+<td>STRING</td>
+<td>256</td>
+<td>N</td>
+<td>Internet address (URL) for web site of the organization responsible for submitting and maintaining the data to be exchanged</td>
+</tr>
+<tr>
+<td>OrgURLText</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Optional Readable text that provides the URL address link</td>
+</tr>
+<tr>
+<td>OrgImageURL</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) that hosts the sample image or photo of the organization</td>
+</tr>
+<tr>
+<td>OrgType</td>
+<td>STRING</td>
+<td>40</td>
+<td>Y</td>
+<td>Organization type</td>
+</tr>
+<tr>
+<td>OrgJurisdictionType</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Organization jurisdiction type</td>
+</tr>
+</tbody></table>
+<h2 id='recarea'>RecArea</h2>
+<p>Recreation area records (e.g. Yosemite National Park, Aldo Leopold Wilderness)                              </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>RecArea ID</td>
+</tr>
+<tr>
+<td>OrgRecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>Foreign Key: Organization OrgID</td>
+</tr>
+<tr>
+<td>RecAreaName</td>
+<td>STRING</td>
+<td>256</td>
+<td>N</td>
+<td>Full Name of the recreational area</td>
+</tr>
+<tr>
+<td>RecAreaDescription</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>N</td>
+<td>Text that describes the recreational area</td>
+</tr>
+<tr>
+<td>RecAreaDirections</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Directions to the recreational area</td>
+</tr>
+<tr>
+<td>RecAreaFeeDescription</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Text describing monetary charges associated with entrance to or usage of a recreational area</td>
+</tr>
+<tr>
+<td>RecAreaMapURL</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) that hosts the recreational area map</td>
+</tr>
+<tr>
+<td>RecAreaReservationURL</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) for the web site hosting the reservation system</td>
+</tr>
+<tr>
+<td>RecAreaPhone</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Phone number for recreational area</td>
+</tr>
+<tr>
+<td>RecAreaEmail</td>
+<td>STRING</td>
+<td>256</td>
+<td>N</td>
+<td>Email address of the recreational area</td>
+</tr>
+<tr>
+<td>RecAreaLatitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td>Y</td>
+<td>Latitude in decimal degrees -90.0 to 90.0</td>
+</tr>
+<tr>
+<td>RecAreaLongitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td>Y</td>
+<td>Longitude in decimal degrees -180.0 to 180.0</td>
+</tr>
+<tr>
+<td>Keywords</td>
+<td>STRING</td>
+<td>4000</td>
+<td>Y</td>
+<td>List of keywords for the recreational area</td>
+</tr>
+<tr>
+<td>StayLimit</td>
+<td>STRING</td>
+<td>500</td>
+<td>Y</td>
+<td>Details on the stay limits for the recreational area</td>
+</tr>
+</tbody></table>
+<h2 id='facility'>Facility</h2>
+<p>Facility records (e.g. Yellowstone Group Campground, Barnum Whitewater Area)                                </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Facility ID</td>
+</tr>
+<tr>
+<td>OrgFacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Organization OrgID</td>
+</tr>
+<tr>
+<td>FacilityName</td>
+<td>STRING</td>
+<td>256</td>
+<td>N</td>
+<td>Full name of the facility</td>
+</tr>
+<tr>
+<td>FacilityTypeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Description of the type of facility</td>
+</tr>
+<tr>
+<td>FacilityPhone</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Phone number of the facility</td>
+</tr>
+<tr>
+<td>FacilityDescription</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>N</td>
+<td>Text describing the main features of the facility</td>
+</tr>
+<tr>
+<td>FacilityDirections</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Text that provides general directions and/or the general location of the facility</td>
+</tr>
+<tr>
+<td>FacilityEmail</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Email address of the facility</td>
+</tr>
+<tr>
+<td>FacilityMapURL</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) that hosts the facility map</td>
+</tr>
+<tr>
+<td>FacilityReservationURL</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) for the web site hosting the reservation system</td>
+</tr>
+<tr>
+<td>FacilityLatitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td>Y</td>
+<td>Latitude in decimal degrees -90.0 to 90.0</td>
+</tr>
+<tr>
+<td>FacilityLongitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td>Y</td>
+<td>Longitude in decimal degrees -180.0 to 180.0</td>
+</tr>
+<tr>
+<td>FacilityAdaAccess</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Information about the Americans with Disabilities Act accessibility for the facility</td>
+</tr>
+<tr>
+<td>FacilityUseFeeDescription</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Text describing monetary charges associated with entrance to or usage of the facility</td>
+</tr>
+<tr>
+<td>LegacyFacilityID</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Legacy facility ID</td>
+</tr>
+<tr>
+<td>Keywords</td>
+<td>STRING</td>
+<td>4000</td>
+<td>Y</td>
+<td>List of keywords for the facility</td>
+</tr>
+<tr>
+<td>StayLimit</td>
+<td>STRING</td>
+<td>500</td>
+<td>Y</td>
+<td>Details on the stay limits for the facility</td>
+</tr>
+</tbody></table>
+<h2 id='recareaactivity'>RecAreaActivity</h2>
+<p>Joins recreation areas to associated activities                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>ActivityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecreationalActivity ActivityID</td>
+</tr>
+<tr>
+<td>RecAreaActivityDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Description of the recreational area activity</td>
+</tr>
+<tr>
+<td>RecAreaActivityFeeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text describing monetary charges associated with the activity</td>
+</tr>
+</tbody></table>
+<h2 id='facilityactivity'>FacilityActivity</h2>
+<p>Joins facilities to associated activities                               </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID</td>
+</tr>
+<tr>
+<td>ActivityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecreationalActivity ActivityID</td>
+</tr>
+<tr>
+<td>FacilityActivityDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Description of the facility activity</td>
+</tr>
+<tr>
+<td>FacilityActivityFeeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text describing monetary charges associated with the activity</td>
+</tr>
+</tbody></table>
+<h2 id='recreationalactivity'>RecreationalActivity</h2>
+<p>List of all activities                              </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ActivityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Activity ID</td>
+</tr>
+<tr>
+<td>RecActivityName</td>
+<td>STRING</td>
+<td>60</td>
+<td>N</td>
+<td>Name of the activity</td>
+</tr>
+<tr>
+<td>RecActivityLevel</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Amount of physical exertion to be expected for a given activity such as hiking, swimming, etc</td>
+</tr>
+</tbody></table>
+<h2 id='recareaaddress'>RecAreaAddress</h2>
+<p>Recreation area addresses                               </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AddressID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Address ID</td>
+</tr>
+<tr>
+<td>StreetAddress1</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 1 of the recreational area</td>
+</tr>
+<tr>
+<td>StreetAddress2</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 2 of the recreational area</td>
+</tr>
+<tr>
+<td>StreetAddress3</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 3 of the recreational area</td>
+</tr>
+<tr>
+<td>City</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>City where the recreational area is located</td>
+</tr>
+<tr>
+<td>AddressStateCode</td>
+<td>STRING</td>
+<td>20</td>
+<td>N</td>
+<td>State code for the recreational area</td>
+</tr>
+<tr>
+<td>PostalCode</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Postal code for the recreational area</td>
+</tr>
+<tr>
+<td>AddressCountryCode</td>
+<td>STRING</td>
+<td>5</td>
+<td>Y</td>
+<td>Abbreviated country code for the recreational area address</td>
+</tr>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>RecAreaAddressType</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Address Type for the recreational area</td>
+</tr>
+</tbody></table>
+<h2 id='facilityaddress'>FacilityAddress</h2>
+<p>Facility addresses                              </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AddressID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Address ID</td>
+</tr>
+<tr>
+<td>StreetAddress1</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 1 of the facility</td>
+</tr>
+<tr>
+<td>StreetAddress2</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 2 of the facility</td>
+</tr>
+<tr>
+<td>StreetAddress3</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Address Line 3 of the facility</td>
+</tr>
+<tr>
+<td>City</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>City where the facility is located</td>
+</tr>
+<tr>
+<td>AddressStateCode</td>
+<td>STRING</td>
+<td>20</td>
+<td>N</td>
+<td>State code for the facility</td>
+</tr>
+<tr>
+<td>PostalCode</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Postal code for the facility</td>
+</tr>
+<tr>
+<td>AddressCountryCode</td>
+<td>STRING</td>
+<td>5</td>
+<td>Y</td>
+<td>Abbreviated country code for the facility address</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID</td>
+</tr>
+<tr>
+<td>FacilityAddressType</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Address type for the facility</td>
+</tr>
+</tbody></table>
+<h2 id='recareaevent'>RecAreaEvent</h2>
+<p>Joins recreation areas to associated events                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>EventID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Event EventID</td>
+</tr>
+</tbody></table>
+<h2 id='facilityevent'>FacilityEvent</h2>
+<p>Joins facilities to associated events                               </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID</td>
+</tr>
+<tr>
+<td>EventID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Event EventID</td>
+</tr>
+</tbody></table>
+<h2 id='event'>Event</h2>
+<p>List of all events (e.g. Boat race, Archery Tournament)                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EventID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Event ID</td>
+</tr>
+<tr>
+<td>EventDataStewardID</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>Data Steward ID for the event</td>
+</tr>
+<tr>
+<td>EventName</td>
+<td>STRING</td>
+<td>60</td>
+<td>N</td>
+<td>Full Name of the event</td>
+</tr>
+<tr>
+<td>EventStartDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Calendar date on which event is scheduled to begin</td>
+</tr>
+<tr>
+<td>EventDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>N</td>
+<td>Text that provides a synopsis of an event</td>
+</tr>
+<tr>
+<td>EventAgeGroup</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Age group for the event if available</td>
+</tr>
+<tr>
+<td>EventURLAddress</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) to a web site providing details about the event</td>
+</tr>
+<tr>
+<td>EventURLText</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Optional text for the URL of the event</td>
+</tr>
+<tr>
+<td>EventEmail</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Email contact for event</td>
+</tr>
+<tr>
+<td>EventRegistrationRequired</td>
+<td>BIT</td>
+<td></td>
+<td>N</td>
+<td>Code requesting a Yes or No response to determine whether registration is required for an event</td>
+</tr>
+<tr>
+<td>EventADAAccess</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Information about the Americans with Disabilities Act accessibility for the event</td>
+</tr>
+<tr>
+<td>EventFeeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text for the description of fees associated with this event</td>
+</tr>
+<tr>
+<td>EventComments</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text for the general occasion or activity to be offered</td>
+</tr>
+<tr>
+<td>EventFrequencyRateDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text that describes how often the event recurs</td>
+</tr>
+<tr>
+<td>EventScopeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text that describes the extent, capacity, and scale of an event.</td>
+</tr>
+<tr>
+<td>EventTypeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text that describes the types of events</td>
+</tr>
+<tr>
+<td>SponsorName</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Full Name of the sponsor for the event</td>
+</tr>
+<tr>
+<td>SponsorEmail</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Sponsor email address for the event</td>
+</tr>
+<tr>
+<td>SponsorURLAddress</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Internet address (URL) to a web site for the sponsor</td>
+</tr>
+<tr>
+<td>EventEndDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Calendar date on which event is scheduled to end</td>
+</tr>
+<tr>
+<td>SponsorURLText</td>
+<td>STRING</td>
+<td>256</td>
+<td>Y</td>
+<td>Optional Readable text that provides the URL Sponsor link</td>
+</tr>
+<tr>
+<td>SponsorPhone</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Phone Number for the sponsor of the Event</td>
+</tr>
+<tr>
+<td>SponsorClassType</td>
+<td>STRING</td>
+<td>20</td>
+<td>Y</td>
+<td>Class and type of sponsor</td>
+</tr>
+</tbody></table>
+<h2 id='recareafacility'>RecAreaFacility</h2>
+<p>Joins recreation areas to associated facilities                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID</td>
+</tr>
+</tbody></table>
+<h2 id='entitylink'>EntityLink</h2>
+<p>Hyperlink to an external site (e.g. Agency site, Facebook, Twitter)                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EntityType</td>
+<td>STRING</td>
+<td>50</td>
+<td>N</td>
+<td>RecArea or Facility</td>
+</tr>
+<tr>
+<td>EntityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: (RecArea RecAreaID) OR (Facility FacilityID)</td>
+</tr>
+<tr>
+<td>LinkType</td>
+<td>STRING</td>
+<td>500</td>
+<td>N</td>
+<td>Type of link, e.g. Facebook, Twitter, Official site</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>STRING</td>
+<td>2000</td>
+<td>N</td>
+<td>Internet address (URL) to a web site</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>STRING</td>
+<td>500</td>
+<td>N</td>
+<td>Full text title</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Text description of the entity link</td>
+</tr>
+</tbody></table>
+<h2 id='entitymedia'>EntityMedia</h2>
+<p>Media links (e.g. images, video)                                </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EntityType</td>
+<td>STRING</td>
+<td>50</td>
+<td>N</td>
+<td>RecArea, Facility, Tour, Entrance, or Site</td>
+</tr>
+<tr>
+<td>EntityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: (RecArea RecAreaID) OR (Facility FacilityID) OR (Tour TourID) OR (PermitEntrance PermitEntranceID) OR (Campsite CampsiteID)</td>
+</tr>
+<tr>
+<td>MediaType</td>
+<td>STRING</td>
+<td>500</td>
+<td>N</td>
+<td>Type of Media, e.g. Image, Video, etc.</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>STRING</td>
+<td>2000</td>
+<td>N</td>
+<td>Internet address (URL) to the entity media</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>STRING</td>
+<td>500</td>
+<td>N</td>
+<td>Full title of the entity media</td>
+</tr>
+<tr>
+<td>Subtitle</td>
+<td>STRING</td>
+<td>1000</td>
+<td>Y</td>
+<td>Optional subtitle of the entity media</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Optional description of the entity media</td>
+</tr>
+<tr>
+<td>Credits</td>
+<td>STRING</td>
+<td>1000</td>
+<td>Y</td>
+<td>Optional credit for entity media</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Height in pixels for media image</td>
+</tr>
+<tr>
+<td>Width</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Width in pixels for the media image</td>
+</tr>
+<tr>
+<td>EmbedCode</td>
+<td>STRING</td>
+<td>MAX*</td>
+<td>Y</td>
+<td>Optional embedded code for media entity</td>
+</tr>
+</tbody></table>
+<h2 id='campsite'>Campsite</h2>
+<p>Campsite records                                </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CampsiteID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Campsite ID</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Facility ID the campsite belongs to</td>
+</tr>
+<tr>
+<td>CampsiteName</td>
+<td>STRING</td>
+<td>255</td>
+<td>N</td>
+<td>Campsite Name</td>
+</tr>
+<tr>
+<td>CampsiteType</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Campsite Type</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Name of loop the campsite resides on</td>
+</tr>
+<tr>
+<td>Type of Use</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Type of use</td>
+</tr>
+<tr>
+<td>CampsiteAccesible</td>
+<td>STRING</td>
+<td>10</td>
+<td>Y</td>
+<td>Is the campsite accessible by vehicle</td>
+</tr>
+<tr>
+<td>CreatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record creation date</td>
+</tr>
+<tr>
+<td>LastUpdateDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record last update date</td>
+</tr>
+</tbody></table>
+<h2 id='permittedequipment'>PermittedEquipment</h2>
+<p>Permitted Equipment associated to campsites (e.g. tent, trailer)                                </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EquipmentName</td>
+<td>STRING</td>
+<td>255</td>
+<td>N</td>
+<td>Equipment Name</td>
+</tr>
+<tr>
+<td>MaxLength</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>Maximum length of equipment</td>
+</tr>
+</tbody></table>
+<h2 id='tour'>Tour</h2>
+<p>Tour records                                </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>TourID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Tour ID</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Facility ID the tour belongs to</td>
+</tr>
+<tr>
+<td>TourName</td>
+<td>STRING</td>
+<td>255</td>
+<td>N</td>
+<td>Tour name</td>
+</tr>
+<tr>
+<td>TourType</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Tour Type</td>
+</tr>
+<tr>
+<td>TourDescription</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Tour description</td>
+</tr>
+<tr>
+<td>TourDuration</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>Tour duration</td>
+</tr>
+<tr>
+<td>TourAccessible</td>
+<td>STRING</td>
+<td>10</td>
+<td>Y</td>
+<td>Is the tour accessible by vehicle</td>
+</tr>
+<tr>
+<td>CreatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record creation date</td>
+</tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record last update date</td>
+</tr>
+</tbody></table>
+<h2 id='permitentrance'>PermitEntrance</h2>
+<p>Permit entrance records                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PermitEntranceID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Permit Entrance ID</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Facility ID the Permit belongs to</td>
+</tr>
+<tr>
+<td>PermitEntranceName</td>
+<td>STRING</td>
+<td>512</td>
+<td>N</td>
+<td>Permit Entrance Name</td>
+</tr>
+<tr>
+<td>PermitEntranceType</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Permit Entrance Type</td>
+</tr>
+<tr>
+<td>PermitEntranceDescription</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Permit Entrance Description</td>
+</tr>
+<tr>
+<td>PermitEntranceAccesible</td>
+<td>STRING</td>
+<td>10</td>
+<td>Y</td>
+<td>Is the permit accessible by vehicle</td>
+</tr>
+<tr>
+<td>Latitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td></td>
+<td>Latitude of the permit location</td>
+</tr>
+<tr>
+<td>Longitude</td>
+<td>DECIMAL</td>
+<td></td>
+<td></td>
+<td>Longitude of the permit location</td>
+</tr>
+<tr>
+<td>District</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>District the permit resides in</td>
+</tr>
+<tr>
+<td>Town</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Town the permit resides in</td>
+</tr>
+<tr>
+<td>Zone</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Zone the permit resides in</td>
+</tr>
+<tr>
+<td>CreatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record creation date</td>
+</tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Record last update date</td>
+</tr>
+</tbody></table>
+<h2 id='attribute'>Attribute</h2>
+<p>Attributes associated to campsites, tours, and permit entrances (e.g. checkout time, shade, water hookup)                               </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AttributeName</td>
+<td>STRING</td>
+<td>60</td>
+<td>Y</td>
+<td>Attribute name</td>
+</tr>
+<tr>
+<td>AttributeValue</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Attribute value</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="Example Responses">Example Responses</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
