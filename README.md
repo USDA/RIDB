@@ -5,3 +5,5 @@ Welcome to the Recreation Information Database (RIDB). The [RIDB](http://ridb.re
 The RIDB team is currently developing a [RESTful API](http://ridb-dev.nsitellc.com/docs/api/v1/) for the purpose of accessing RIDB API endpoints, containing information for federal recreation areas, facilities, campsites, tours, and permits. Federal agencies provide and are responsible for the quality of data contained in the RIDB. We welcome your [feedback](https://github.com/USDA/RIDB/issues) as we work to finalize primary development of the API.
 
 [API Documentation](http://usda.github.io/RIDB/) is available on GitHub as well as an [issue tracker](https://github.com/USDA/RIDB/issues) where we welcome your API questions and comments.
+
+A Ruby wrapper class for the API can be [found here] (https://github.com/boscomonkey/doi-rec-data).
