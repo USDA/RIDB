@@ -47,7 +47,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the <strong>development</strong> <a href="http://ridb.recreation.gov/" target="_blank">Recreation Information Database</a> (RIDB) Application Programming Interface (API). This API is provided for the purpose of accessing RIDB API endpoints, containing information for federal recreation areas, facilities, campsites, tours, and permits. </p>
 
-<p>Federal agencies provide and are responsible for the quality of data contained in the RIDB. Some data may be missing or incomplete. For example, some latitudes and longitudes may be blank. Please be mindful of this when searching for something in particular or applying proximity filters.</p>
+<p>Federal agencies provide and are responsible for the quality of data contained in the RIDB. Some data may be missing or incomplete. For example, some latitudes and longitudes may be blank. Please be mindful of this when searching for something in particular or applying proximity (radius) filters.</p>
 
 <p>Please contribute to our GitHub <a href='https://github.com/USDA/RIDB/issues'>issue tracker</a> if you have any questions or concerns.  Interested in learning more about the data itself?  See <a href="http://ridb.recreation.gov/RIDBWebSvcManual.pdf" target="_blank">the documentation.</a></p>
 
@@ -76,17 +76,22 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <blockquote>
 <p>Example organization JSON response</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"OrgAbbrevName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NPS"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgJurisdictionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Federal"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Department of the Interior"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgURLText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgURLAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.nps.gov"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgImageURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nps.gif"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgID"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Park Service"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
+<pre class="highlight json">
+<span class="s2">
+{
+   "OrgAbbrevName": "NPS",
+   "OrgJurisdictionType": "Federal",
+   "OrgType": "Department of the Interior",
+   "LastUpdatedDate": "2007-02-26",
+   "OrgURLText": "",
+   "OrgURLAddress": "http://www.nps.gov",
+   "OrgImageURL": "nps.gif",
+   "OrgParentID": 139,
+   "OrgID": 128,
+   "OrgName": "National Park Service"
+}
+</span>
+</pre>
 
 <p>This endpoint retrieves all organizations.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -94,7 +99,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -126,7 +131,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -144,7 +149,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -204,7 +209,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -223,12 +228,12 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <td>the recreation area ID</td>
 </tr>
 </tbody></table>
-<h2 id='get-all-facilites-for-a-specific-organization'>Get All Facilites for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
+<h2 id='get-all-facilites-for-a-specific-organization'>Get All Facilities for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/facilities</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -288,7 +293,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -314,25 +319,35 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <blockquote>
 <p>Example recreation area JSON response</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"RecAreaMapURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1126</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaReservationURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Upper Colorado River Recreation Management Area"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This 80-mile corridor follows the Colorado River from near its headwaters to Glenwood Canyon. Public lands along the corridor offer visitors outstanding opportunities for float boating, fishing and scenic driving."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kfo_webmail@blm.gov&lt;p&gt; BLM_CO_SI_CRVFO_Webmail@blm.gov"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">39.48285</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"StayLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"October, 24 2012 11:36:32"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1708</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-107.9187</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaDirections"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The river corridor lies between Steamboat Springs and Vail, Colorado. River access is provided by I-70 and several highways and county roads. Kremmling, Dotsero, and the White River National Forest are a 2-3 hour drive from the Denver Metropolitan area."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RecAreaPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970-724-3000"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgRecAreaID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
+<pre class="highlight json">
+<span class="s2">
+{
+   "RecAreaMapURL": "",
+   "LastUpdatedBy": 1126,
+   "RecAreaReservationURL": "",
+   "RecAreaFeeDescription": "",
+   "RecAreaName": "Upper Colorado River Recreation Management Area",
+   "RecAreaDescription": "This 80-mile corridor follows the Colorado River from near its headwaters to Glenwood Canyon.  Public lands along the corridor offer visitors outstanding opportunities for float boating, fishing and scenic driving.",
+   "Keywords": "",
+   "RecAreaEmail": "kfo_webmail@blm.gov<p> BLM_CO_SI_CRVFO_Webmail@blm.gov",
+   "RecAreaLatitude": 39.48285,
+   "StayLimit": "",
+   "GEOJSON":    {
+      "COORDINATES":       [
+         -107.9187,
+         39.48285
+      ],
+      "TYPE": "Point"
+   },
+   "LastUpdatedDate": "2012-10-24",
+   "RecAreaID": 1708,
+   "RecAreaLongitude": -107.9187,
+   "RecAreaDirections": "The river corridor lies between Steamboat Springs and Vail, Colorado. River access is provided by I-70 and several highways and county roads. Kremmling, Dotsero, and the White River National Forest are a 2-3 hour drive from the Denver Metropolitan area.",
+   "RecAreaPhone": "970-724-3000",
+   "OrgRecAreaID": ""
+}
+</span>
+</pre>
 
 <p>This endpoint retrieves all recreation areas.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -340,7 +355,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -414,7 +429,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -437,28 +452,31 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <blockquote>
 <p>Example recreation area facility JSON response</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"FacilityEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityLongitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"LastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1090</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This recreation area is part of &lt;a href=http://www.recreation.gov/recreationalAreaDetails.do?contractCode=NRSO&amp;recAreaId=463&amp;agencyCode=130&gt;Alamo Lake&lt;/a&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityLatitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityTypeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityMapURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityReservationURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityDirections"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alamo State Park"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityUseFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"StayLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"LastUpdatedDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"September, 25 2013 14:26:12"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityAdaAccess"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"LegacyFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OrgFacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5459596</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">247799</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
+<pre class="highlight json">
+<span class="s2">
+{
+   "FacilityEmail": "",
+   "FacilityLongitude": "",
+   "LastUpdatedBy": 1090,
+   "FacilityDescription": "This recreation area is part of Alamo Lake",
+   "FacilityLatitude": "",
+   "FacilityTypeDescription": "",
+   "FacilityPhone": "",
+   "FacilityMapURL": "",
+   "FacilityReservationURL": "",
+   "FacilityDirections": "",
+   "FacilityName": "Alamo State Park",
+   "Keywords": "",
+   "FacilityUseFeeDescription": "",
+   "StayLimit": "",
+   "LastUpdatedDate": "2013-09-25",
+   "FacilityAdaAccess": "",
+   "LegacyFacilityID": "",
+   "OrgFacilityID": 5459596,
+   "FacilityID": 247799
+}
+</span>
+</pre>
 
 <p>This endpoint retrieves all facilities within a specific recreation area.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -466,7 +484,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -528,7 +546,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -573,7 +591,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -605,7 +623,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -643,7 +661,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -663,7 +681,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -707,7 +725,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -745,7 +763,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -771,7 +789,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -810,7 +828,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -848,7 +866,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -874,7 +892,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -932,7 +950,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -970,7 +988,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -996,7 +1014,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1033,7 +1051,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1071,7 +1089,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1097,7 +1115,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1118,7 +1136,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tbody></table>
 
           <h1 id='facilities'>Facilities</h1>
-<p>Facilities are points of interest within recreations areas. Facilities can also &ldquo;stand on their own&rdquo; without a parent recreation area. Facilites can also be comprised of or more child facilities. Examples are a ranger station, hotel, campground or trail. Facilities can also be areas within larger facilities.
+<p>Facilities are points of interest within recreations areas. Facilities can also &ldquo;stand on their own&rdquo; without a parent recreation area. Facilities can also be comprised of or more child facilities. Examples are a ranger station, hotel, campground or trail. Facilities can also be areas within larger facilities.
 Example is Alamo National Park that resides within the Alamo Lake recreation area. Facilities can also be reservable or non-reservable.</p>
 <h2 id='get-all-facilities'>Get All Facilities</h2>
 <blockquote>
@@ -1153,7 +1171,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1227,7 +1245,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1270,7 +1288,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1302,7 +1320,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1340,7 +1358,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1360,7 +1378,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1404,7 +1422,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1442,7 +1460,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1468,7 +1486,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1507,7 +1525,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1545,7 +1563,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1571,7 +1589,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1629,7 +1647,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1667,7 +1685,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1693,7 +1711,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1730,7 +1748,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1768,7 +1786,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1794,7 +1812,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1840,7 +1858,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1872,7 +1890,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1885,14 +1903,14 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <td>the campsite ID</td>
 </tr>
 </tbody></table>
-<h2 id='get-all-campsites-for-a-specific-facility'>Get All Campsites For a Specific Facility</h2>
+<h2 id='get-all-campsites-for-a-specific-facility'>Get All Campsites for a Specific Facility</h2>
 <p>This endpoint retrieves all campsites for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/campsites</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1930,7 +1948,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1956,7 +1974,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -1994,7 +2012,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2020,7 +2038,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2090,7 +2108,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2122,7 +2140,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2142,7 +2160,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2180,7 +2198,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2206,7 +2224,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2226,7 +2244,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2252,7 +2270,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2346,7 +2364,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2378,7 +2396,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2391,14 +2409,14 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <td>the tour ID</td>
 </tr>
 </tbody></table>
-<h2 id='get-all-tours-for-a-specific-facility'>Get All Tours For a Specific Facility</h2>
+<h2 id='get-all-tours-for-a-specific-facility'>Get All Tours for a Specific Facility</h2>
 <p>This endpoint retrieves all tours for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/tours</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2436,7 +2454,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2462,7 +2480,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2514,7 +2532,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2548,7 +2566,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2563,7 +2581,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tbody></table>
 
           <h1 id='events'>Events</h1>
-<p>Events are associated to either recreation areas or facilities. Examples are Salmon Festivals, Halloween in the Park, Ballon Festivals, Environmental Fairs, and Fishing tournaments.</p>
+<p>Events are associated to either recreation areas or facilities. Examples are Salmon Festivals, Halloween in the Park, Balloon Festivals, Environmental Fairs, and Fishing tournaments.</p>
 <h2 id='get-all-events'>Get All Events</h2>
 <blockquote>
 <p>Example event JSON response</p>
@@ -2603,7 +2621,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2635,7 +2653,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2650,7 +2668,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tbody></table>
 
           <h1 id='media'>Media</h1>
-<p>Media is hyperlinks to either images or video assoicated with a recreation area, facility or campsite.</p>
+<p>Media is hyperlinks to either images or video associated with a recreation area, facility or campsite.</p>
 <h2 id='get-all-media'>Get All Media</h2>
 <blockquote>
 <p>Example media JSON response</p>
@@ -2676,7 +2694,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2708,7 +2726,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2744,7 +2762,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2776,7 +2794,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Paramater</th>
+<th>Parameter</th>
 <th>Data Type</th>
 <th>Required</th>
 <th>Description</th>
@@ -2848,7 +2866,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <p>The response body will return TOTAL_COUNT and CURRENT_COUNT. </p>
 
 <ul>
-<li>TOTAL_COUNT represents the total number of records in the entire result set. TODO: this isn&rsquo;t populated correctly yet</li>
+<li>TOTAL_COUNT represents the total number of records in the entire result set.</li>
 <li>CURRENT_COUNT represents the number of records returned in the current result set based on the offest provided or if the total result set is nearing the completion of its records.</li>
 </ul>
 <h3 id='http-request'>HTTP Request</h3>
