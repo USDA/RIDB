@@ -55,7 +55,14 @@
 Please note, this API is still under development and is open for evaluation and feedback only. Please do not use the data as the authoritative source!
 </aside></p>
 
-          <h1 id='export-formats'>Export Formats</h1>
+<h1 id='api-endpoints'>API Endpoints</h1>
+<p>All API requests should be made to: </p>
+
+<p><strong>https://ridb-dev.nsitellc.com/api/v1/{endpoint}</strong></p>
+
+<p>All requests to RIDB endpoints that are not HTTPS will be redirected to HTTPS.</p>
+
+<h1 id='export-formats'>Export Formats</h1>
 <p>The RIDB API provides data in JSON or XML formats. JSON is the default behavior, but browsers may request the data as XML depending on how they evaluate the accept header. To export explicitly as JSON or XML, simply add &ldquo;.json&rdquo; or &ldquo;.xml&rdquo; to the end of any resource call.</p>
 
 <p>
