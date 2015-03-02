@@ -37,7 +37,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://ridb-dev.nsitellc.com/?action=register'>Sign Up for a RIDB Developer Key</a></li>
+            <li><a href='https://ridb.recreation.gov/?action=register'>Sign Up for a RIDB Developer Key</a></li>
             <li><a href='http://github.com/tripit/slate' target="_blank">Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -45,15 +45,11 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the <strong>development</strong> <a href="http://ridb.recreation.gov/" target="_blank">Recreation Information Database</a> (RIDB) Application Programming Interface (API). This API is provided for the purpose of accessing RIDB API endpoints which contain information for federal recreation areas, facilities, campsites, tours, and permits. </p>
+<p>Welcome to the <a href="http://ridb.recreation.gov/" target="_blank">Recreation Information Database</a> (RIDB) Application Programming Interface (API). This API is provided for the purpose of accessing RIDB API endpoints which contain information for federal recreation areas, facilities, campsites, tours, and permits. </p>
 
 <p>Federal agencies provide and are responsible for the quality of data contained in the RIDB. Some data may be missing or incomplete. For example, some latitudes and longitudes may be blank. Please be mindful of this when searching for something in particular or applying proximity (radius) filters.</p>
 
 <p>Please contribute to our GitHub <a href="https://github.com/USDA/RIDB/issues" target="_blank">issue tracker</a> if you have any questions or concerns.
-
-<p><aside class="notice">
-Please note, this API is still under development and is open for evaluation and feedback only. Please do not use the data as the authoritative source!
-</aside></p>
 
 <h1 id='about-the-ridb'>About the RIDB</h1>
 <p>
@@ -68,7 +64,7 @@ The Recreation Information Database (RIDB) provides data resources to citizens, 
 <h1 id='api-endpoints'>API Endpoints</h1>
 <p>All API requests should be made to: </p>
 
-<p><strong>https://ridb-dev.nsitellc.com/api/v1/{endpoint}</strong></p>
+<p><strong>https://ridb.recreation.gov/api/v1/{endpoint}</strong></p>
 
 <p>All requests to RIDB endpoints that are not HTTPS will be redirected to HTTPS.</p>
 
@@ -80,7 +76,7 @@ The Recreation Information Database (RIDB) provides data resources to citizens, 
 </p>
 
           <h1 id='authentication'>Authentication</h1>
-<p>The RIDB API uses keys to allow access. Registration is free and your key is available to you immediately upon registration. You can register for an API key <a href="https://ridb-dev.nsitellc.com/?action=register">here</a>.</p>
+<p>The RIDB API uses keys to allow access. Registration is free and your key is available to you immediately upon registration. Register for an API key <a href="https://ridb.recreation.gov/?action=register">here</a>.</p>
 
 <p>The RIDB API expects for the key to be included in all API requests to the server in an HTTP header that looks like the following: <code class="prettyprint">apikey:thisIsMyKey</code></p>
 
@@ -89,7 +85,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </aside></p>
 
           <h1 id='get-all-rec-area-data'>Get All Rec Area Data</h1>
-<p>The RIDB is comprised of several data points, primarily recreation areas, facilities, campsites, tours, and permit entrances. While we offer many API endpoints to make this data available for download, you may be asking yourself &ldquo;How do I download the entire RIDB data set?&rdquo; This functionality is currently in development. We will be providing the ability to download the entire RIDB data set in one file. Download formats supported will be JSON, XML, and a package of CSV files.</p>
+<p>The RIDB is comprised of several data points, primarily recreation areas, facilities, campsites, tours, and permit entrances. While we offer many API endpoints to make this data available for download, you may be asking yourself &ldquo;How do I download the entire RIDB data set?&rdquo; We provide the ability to download the entire RIDB data set in one file. Download formats supported are zip file packages of JSON and CSV files. Visit the <a href='https://ridb.recreation.gov/?action=download'>data download</a> page to view and download these file packages. </p>
 
           <h1 id='organizations'>Organizations</h1>
 <p>RIDB organizations are the federal agencies that provide RIDB data. </p>
@@ -116,7 +112,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves all organizations.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -148,7 +144,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h2 id='get-a-specific-organization'>Get a Specific Organization</h2>
 <p>This endpoint retrieves a specific organization.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{organizationID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{organizationID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -166,7 +162,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 <h2 id='get-all-recreation-areas-for-a-specific-organization'>Get All Recreation Areas for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/recareas</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -226,7 +222,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 <h2 id='get-a-specific-recreation-area-for-a-specific-organization'>Get a Specific Recreation Area for a Specific Organization</h2><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/recareas/{recareaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas/{recareaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -250,7 +246,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 <h2 id='get-all-facilites-for-a-specific-organization'>Get All Facilities for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/facilities</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -310,7 +306,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 <h2 id='get-a-specific-facility-for-a-specific-organization'>Get a Specific Facility for a Specific Organization</h2><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/organizations/{orgID}/facilities/{facilityID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities/{facilityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -372,7 +368,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves all recreation areas.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -446,7 +442,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <h2 id='get-a-specific-recreation-area'>Get a Specific Recreation Area</h2>
 <p>This endpoint retrieves a specific recreation area.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -501,7 +497,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves all facilities within a specific recreation area.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recareaID}/facilities/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recareaID}/facilities/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -563,7 +559,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific facility within a specific recreation area.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recareaID}/facilities/{facilityid}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recareaID}/facilities/{facilityid}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -608,7 +604,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves all recreation area addresses. Each recreation area must have at least one state and country listed.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareaaddresses/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareaaddresses/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -640,7 +636,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves addresses for a specific recreation area.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/recareaaddresses/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/recareaaddresses/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -678,7 +674,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific recreation area address.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareaaddresses/{recAreaAddressID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareaaddresses/{recAreaAddressID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -698,7 +694,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>Another endpoint to retrieve a specific recreation area address.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/recareaaddresses/{recAreaAddressID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/recareaaddresses/{recAreaAddressID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -742,7 +738,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves all media for a specific recreation area. See <a href="#media">media</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/media/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -780,7 +776,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific recreation area media item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -806,7 +802,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>Another endpoint to retrieve a specific recreation area media item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -845,7 +841,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves links for a specific recreation area. See <a href="#links">links</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/links/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -883,7 +879,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific recreation area link item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/{entityLinkID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/links/{entityLinkID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -909,7 +905,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>Another endpoint to retrieve a specific recreation area link item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/links/{entityLinkID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/links/{entityLinkID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -967,7 +963,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves events for a specific recreation area. See <a href="#events">events</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/events/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1005,7 +1001,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific recreation area event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/{entityEventID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/events/{entityEventID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1031,7 +1027,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>Another endpoint to retrieve a specific recreation area event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/events/{eventID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/events/{eventID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1068,7 +1064,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves activities for a specific recreation area. See <a href="#activities">activities</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/activities/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1106,7 +1102,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>This endpoint retrieves a specific recreation area activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/{activityID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/activities/{activityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1132,7 +1128,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <p>Another endpoint to retrieve a specific recreation area activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas/{recAreaID}/activities/{activityID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/activities/{activityID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1188,7 +1184,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all facilities.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1262,7 +1258,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-facility'>Get a Specific Facility</h2>
 <p>This endpoint retrieves a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1305,7 +1301,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all facility addresses. Each facility must have at least one state and country listed.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilityaddresses/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilityaddresses/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1337,7 +1333,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves addresses for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/facilityaddresses/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/facilityaddresses/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1375,7 +1371,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specific facility address.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilityaddresses/{facilityAddressID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilityaddresses/{facilityAddressID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1395,7 +1391,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>Another endpoint to retrieve a specific facility address.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/facilityaddresses/{facilityAddressID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/facilityaddresses/{facilityAddressID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1439,7 +1435,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all media for a specific facility. See <a href="#media">media</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/media/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1477,7 +1473,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specific facility media item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1503,7 +1499,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>Another endpoint to retrieve a specific facility media item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1542,7 +1538,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all links for a specific facility. See <a href="#links">links</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/links/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1580,7 +1576,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specific facility link item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1606,7 +1602,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>Another endpoint to retrieve a specific facility link item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1664,7 +1660,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves events for a specific facility. See <a href="#events">events</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/events/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1702,7 +1698,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specific facility event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/{entityEventID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/events/{entityEventID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1728,7 +1724,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>Another endpoint to retrieve a specific facility event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/events/{eventID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/events/{eventID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1765,7 +1761,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves activities for a specific facility. See <a href="#activities">activities</a> for more information.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1803,7 +1799,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specificfacility activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/{activityID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/{activityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1829,7 +1825,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>Another endpoint to retrieve a specific facility activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/activities/{activityID}/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/{activityID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1875,7 +1871,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all campsites.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1907,7 +1903,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-campsite'>Get a Specific Campsite</h2>
 <p>This endpoint retrieves a specific campsite.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1927,7 +1923,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-campsites-for-a-specific-facility'>Get All Campsites for a Specific Facility</h2>
 <p>This endpoint retrieves all campsites for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/campsites</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/campsites</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1965,7 +1961,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-campsite-for-a-specific-facility'>Get a Specific Campsite for a Specific Facility</h2>
 <p>This endpoint retrieves a specific campsite for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/campsites/{campsiteID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/campsites/{campsiteID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1991,7 +1987,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-permitted-equipment-for-a-campsite'>Get All Permitted Equipment for a Campsite</h2>
 <p>This endpoint retrieves all permitted equipment for a campsite.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}/permittedequipment</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}/permittedequipment</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2029,7 +2025,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-permitted-equipment-for-a-specific-campsite'>Get a Specific Permitted Equipment for a Specific Campsite</h2>
 <p>This endpoint retrieves a specific permitted equipment for a specific campsite.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}/permittedequipment/{permittedequipmentID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}/permittedequipment/{permittedequipmentID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2055,7 +2051,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-attributes-for-a-specific-campsite'>Get All Attributes for a Specific Campsite</h2>
 <p>This endpoint retrieves all attributes for a specific campsite.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/campsites/{campsiteID}/attributes</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}/attributes</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2125,7 +2121,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all permit entrances.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2157,7 +2153,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-permit-entrance'>Get a Specific Permit Entrance</h2>
 <p>This endpoint retrieves a specific permit entrance.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitEntranceID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2177,7 +2173,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-permit-entrances-for-a-specific-facility'>Get All Permit Entrances For a Specific Facility</h2>
 <p>This endpoint retrieves all permit entrances for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/permitentrances</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/permitentrances</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2215,7 +2211,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-permit-entrance-for-a-specific-facility'>Get a Specific Permit Entrance for a Specific Facility</h2>
 <p>This endpoint retrieves a specific permit entrance for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/permitentrances/{permitEntranceID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/permitentrances/{permitEntranceID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2241,7 +2237,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-zones-for-a-specific-permit-entrance'>Get all Zones for a Specific Permit Entrance</h2>
 <p>This endpoint retrieves all zones for a specific permit entrance.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}/zones</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitEntranceID}/zones</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2261,7 +2257,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-zones-for-a-specific-permit-entrance'>Get all Zones for a Specific Permit Entrance</h2>
 <p>This endpoint retrieves a specific zone for a specific permit entrance.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}/zones/{zoneID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitEntranceID}/zones/{zoneID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2287,7 +2283,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-attributes-for-a-specific-permit-entrance'>Get All Attributes for a Specific Permit Entrance</h2>
 <p>This endpoint retrieves all attributes for a specific permit entrance.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/permitentrances/{permitEntranceID}/attributes</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitEntranceID}/attributes</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2381,7 +2377,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all tours.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/tours</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/tours</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2413,7 +2409,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-tour'>Get a Specific Tour</h2>
 <p>This endpoint retrieves a specific tour.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/tours/&lt;tourID&gt;</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/tours/&lt;tourID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2433,7 +2429,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-tours-for-a-specific-facility'>Get All Tours for a Specific Facility</h2>
 <p>This endpoint retrieves all tours for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/tours</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/tours</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2471,7 +2467,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-tour-for-a-specific-facility'>Get a Specific Tour for a Specific Facility</h2>
 <p>This endpoint retrieves a specific tour for a specific facility.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/facilities/{facilityID}/tours/{tourID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/tours/{tourID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2497,7 +2493,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-all-attributes-for-a-specific-tour'>Get All Attributes for a Specific Tour</h2>
 <p>This endpoint retrieves all attributes for a specific tour.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/tours/{tourID}/attributes</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/tours/{tourID}/attributes</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2549,7 +2545,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all activities.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/activities/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/activities/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2583,7 +2579,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves a specific activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/activities/{activityID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/activities/{activityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2638,7 +2634,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all events.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/events/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/events/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2670,7 +2666,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-event'>Get a Specific Event</h2>
 <p>This endpoint retrieves a specific event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/events/{eventID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/events/{eventID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2711,7 +2707,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all media.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/media/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/media/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2743,7 +2739,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-media-item'>Get a Specific Media Item</h2>
 <p>This endpoint retrieves a specific media item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/media/{entityMediaID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/media/{entityMediaID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2779,7 +2775,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 
 <p>This endpoint retrieves all links.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/links/</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/links/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2811,7 +2807,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <h2 id='get-a-specific-link-item'>Get a Specific Link Item</h2>
 <p>This endpoint retrieves a specific link item.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/links/{entityLinkID}</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/links/{entityLinkID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2851,10 +2847,6 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <td>Request Failed - Parameters were valid but request failed.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The API requested is for administrators only TODO: need to add this error code</td>
-</tr>
-<tr>
 <td>404</td>
 <td>Not Found - The requested item doesn&rsquo;t exist.</td>
 </tr>
@@ -2891,12 +2883,12 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <li>CURRENT_COUNT represents the number of records returned in the current result set based on the offest provided or if the total result set is nearing the completion of its records.</li>
 </ul>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas?offset=100&amp;limit=25</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?offset=100&amp;limit=25</code></p>
 
           <h1 id='versioning'>Versioning</h1>
 <p>The RIDB API uses versions. The version is referenced in all API end point calls. </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb-dev.nsitellc.com/api/v1/recareas</code></p>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas</code></p>
 
 <h1 id='entity-relationship-diagram'>Entity Relationship Diagram</h1>
 <p>The following diagram represents the RIDB data relationships. Click the image for a larger version.</p>
