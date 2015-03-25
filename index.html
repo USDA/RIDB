@@ -2965,6 +2965,44 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Organization jurisdiction type</td>
 </tr>
 </tbody></table>
+
+<h2 id='recarea'>OrgEntity</h2>
+<p>Relationship between organizations and recreation areas, and facilities</p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EntityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>RecArea ID or Facility ID</td>
+</tr>
+<tr>
+<td>EntityType</td>
+<td>STRING</td>
+<td>1024</td>
+<td>N</td>
+<td>"Facility" or "RecArea"</td>
+</tr>
+<tr>
+<td>OrgID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>The organization ID</td>
+</tr>
+</tbody>
+</table>
+
+
 <h2 id='recarea'>RecArea</h2>
 <p>Recreation area records (e.g. Yosemite National Park, Aldo Leopold Wilderness)                              </p>
 
@@ -2989,7 +3027,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>INT</td>
 <td></td>
 <td>Y</td>
-<td>Foreign Key: Organization OrgID</td>
+<td>The agency's internal Recreation Area ID</td>
 </tr>
 <tr>
 <td>RecAreaName</td>
@@ -3100,7 +3138,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>INT</td>
 <td></td>
 <td>N</td>
-<td>Foreign Key: Organization OrgID</td>
+<td>The agency's internal Facility ID</td>
 </tr>
 <tr>
 <td>FacilityName</td>
@@ -3208,8 +3246,58 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Details on the stay limits for the facility</td>
 </tr>
 </tbody></table>
-<h2 id='recareaactivity'>RecAreaActivity</h2>
-<p>Joins recreation areas to associated activities                             </p>
+<h2 id='entityactivity'>EntityActivity</h2>
+<p>Joins recreation areas and facilities to associated activities                             </p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EntityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID or Facility FacilityID</td>
+</tr>
+<tr>
+<td>EntityType</td>
+<td>STRING</td>
+<td>1024</td>
+<td>N</td>
+<td>Entity Type. "RecArea" or "Facility"</td>
+</tr>
+<tr>
+<td>ActivityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecreationalActivity ActivityID</td>
+</tr>
+<tr>
+<td>ActivityDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Description of the activity</td>
+</tr>
+<tr>
+<td>ActivityFeeDescription</td>
+<td>STRING</td>
+<td>1024</td>
+<td>Y</td>
+<td>Text describing monetary charges associated with the activity</td>
+</tr>
+</tbody></table>
+
+
+<h2 id='recareafacility'>RecAreaFacility</h2>
+<p>Joins parent recreation areas to child facilities</p>
 
 <table><thead>
 <tr>
@@ -3228,68 +3316,16 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Foreign Key: RecArea RecAreaID</td>
 </tr>
 <tr>
-<td>ActivityID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: RecreationalActivity ActivityID</td>
-</tr>
-<tr>
-<td>RecAreaActivityDescription</td>
-<td>STRING</td>
-<td>1024</td>
-<td>Y</td>
-<td>Description of the recreational area activity</td>
-</tr>
-<tr>
-<td>RecAreaActivityFeeDescription</td>
-<td>STRING</td>
-<td>1024</td>
-<td>Y</td>
-<td>Text describing monetary charges associated with the activity</td>
-</tr>
-</tbody></table>
-<h2 id='facilityactivity'>FacilityActivity</h2>
-<p>Joins facilities to associated activities                               </p>
-
-<table><thead>
-<tr>
-<th>Field Name</th>
-<th>Format</th>
-<th>Length</th>
-<th>Optional</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
 <td>FacilityID</td>
 <td>INT</td>
 <td></td>
 <td>N</td>
 <td>Foreign Key: Facility FacilityID</td>
 </tr>
-<tr>
-<td>ActivityID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: RecreationalActivity ActivityID</td>
-</tr>
-<tr>
-<td>FacilityActivityDescription</td>
-<td>STRING</td>
-<td>1024</td>
-<td>Y</td>
-<td>Description of the facility activity</td>
-</tr>
-<tr>
-<td>FacilityActivityFeeDescription</td>
-<td>STRING</td>
-<td>1024</td>
-<td>Y</td>
-<td>Text describing monetary charges associated with the activity</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+
+
 <h2 id='recreationalactivity'>RecreationalActivity</h2>
 <p>List of all activities                              </p>
 
@@ -3562,6 +3598,20 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td></td>
 <td>N</td>
 <td>Event ID</td>
+</tr>
+<tr>
+<td>EntityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID or RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>EntityType</td>
+<td>STRING</td>
+<td>1024</td>
+<td>N</td>
+<td>"Facility" or "RecArea"</td>
 </tr>
 <tr>
 <td>EventDataStewardID</td>
