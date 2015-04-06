@@ -68,6 +68,22 @@ The Recreation Information Database (RIDB) provides data resources to citizens, 
 
 <p>All requests to RIDB endpoints that are not HTTPS will be redirected to HTTPS.</p>
 
+<!-- Authentication -->
+<h1 id='authentication'>Authentication</h1>
+<p>The RIDB API uses keys to allow access. Registration is free and your key is available to you immediately upon registration. Register for an API key <a href="https://ridb.recreation.gov/?action=register">here</a>.</p>
+
+<p>The RIDB API allows two approaches for authentication with the API key:</p>
+
+<ul>
+<li>In an HTTP header that looks like the following: <code class="prettyprint">apikey:thisIsMyKey</code></li>
+<li>In a URL parameter that looks like the following: <code class="prettyprint">?apikey=thisIsMyKey</code></li>
+</ul>
+
+<p><aside class="notice">
+You must replace <code class="prettyprint">thisIsMyKey</code> with your personal API key found on your RIDB profile page.
+</aside></p>
+
+<!-- Export Formats -->
 <h1 id='export-formats'>Export Formats</h1>
 <p>The RIDB API provides data in JSON or XML formats. JSON is the default behavior, but browsers may request the data as XML depending on how they evaluate the accept header. To export explicitly as JSON or XML, simply add &ldquo;.json&rdquo; or &ldquo;.xml&rdquo; to the end of any resource call.</p>
 
@@ -75,16 +91,7 @@ The Recreation Information Database (RIDB) provides data resources to citizens, 
 	<aside class="notice"> CSV exports are available in the <a href="#get-all-rec-area-data">Get All Rec Area Data</a> section</aside>
 </p>
 
-          <h1 id='authentication'>Authentication</h1>
-<p>The RIDB API uses keys to allow access. Registration is free and your key is available to you immediately upon registration. Register for an API key <a href="https://ridb.recreation.gov/?action=register">here</a>.</p>
-
-<p>The RIDB API expects for the key to be included in all API requests to the server in an HTTP header that looks like the following: <code class="prettyprint">apikey:thisIsMyKey</code></p>
-
-<p><aside class="notice">
-You must replace <code class="prettyprint">thisIsMyKey</code> with your personal API key found on your RIDB profile page.
-</aside></p>
-
-          <h1 id='get-all-rec-area-data'>Get All Rec Area Data</h1>
+<h1 id='get-all-rec-area-data'>Get All Rec Area Data</h1>
 <p>The RIDB is comprised of several data points, primarily recreation areas, facilities, campsites, tours, and permit entrances. While we offer many API endpoints to make this data available for download, you may be asking yourself &ldquo;How do I download the entire RIDB data set?&rdquo; We provide the ability to download the entire RIDB data set in one file. Download formats supported are zip file packages of JSON and CSV files. Visit the <a href='https://ridb.recreation.gov/?action=datadownload'>data download</a> page to view and download these file packages. </p>
 
           <h1 id='organizations'>Organizations</h1>
@@ -2320,7 +2327,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tbody></table>
 
           <h1 id='tours'>Tours</h1>
-<p>Tours are associated to parent facilities. Tours can alos be members of parent tour packages as denoted by the &ldquo;membertours&rdquo; attribute.</p>
+<p>Tours are associated to parent facilities. Tours can also be members of parent tour packages as denoted by the &ldquo;membertours&rdquo; attribute.</p>
 <h2 id='get-all-tours'>Get All Tours</h2>
 <blockquote>
 <p>Example tour JSON response</p>
