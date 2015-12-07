@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+
+<p tabindex="1"	alt="test">The Organization table has a primary key of orgid</p>
+<p>The OrgRecAreaRole table has the foreign keys of orgid and recareaid</p>
+<p>The RecArea table has a primary key of recareaid</p>
+<p>The RecAreaAddress table has a primary key of addressid and has a foreign key of recareaid</p>
+<p>The Facility table has a primary key of facilityid</p>
+<p>The FacilityAreaAddress table has a primary key of addressid and has a foreign key of faciltyid</p>
+<p>The RecreationalActivity table has a primary key of activityid</p>
+<p>The RecAreaActivity table has the foreign keys of recareaid and activityid</p>
+<p>The FacilityActivity table has the foreign keys of facilityid and activityid</p>
+<p>The Event table has a primary key of eventid</p>
+<p>The RecAreaEvent table has the foreign keys of recareaid and eventid</p>
+<p>The FacilityEvent table has the foreign keys of facilityid and eventid</p>
+<p>The EntityLink table has a foreign key of entityid with an entitytype column to distinguish between RecArea and Facilty entities</p>
+<p>The EntityMedia table has a foreign key of entityid with an entitytype column to distinguish between RecArea and Facilty entities</p>
+<p>The Campsite table has a primary key of campsiteid and a foreign key of facilityid</p>
+<p>The Tour table has a primary key of tourid and a foreign key of facilityid</p>
+<p>The PermitEntrance table has a primary key of permitentranceid and a foreign key of facilityid</p>
+<p>The PermittedEquipment table data is nested within the Campsites API nodes to designate the relationship to the Campsite record</p>
+<p>The Attribute table data is nested with the Campsite, Tour, and PermitEntrance API nodes to designate the relationship to these records</p>
+  </body>
+  </htm
