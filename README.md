@@ -7,3 +7,9 @@ The RIDB offers a [RESTful API](http://usda.github.io/RIDB) for the purpose of a
 [API Documentation](http://usda.github.io/RIDB/) is available on GitHub as well as an [issue tracker](https://github.com/USDA/RIDB/issues) where we welcome your API questions and comments.
 
 A Ruby wrapper class for the API can be [found here] (https://github.com/boscomonkey/doi-rec-data).
+
+# Bayes Hack April 23-24 2016
+
+[Bayes Hack] (http://bayeshack.org/): Washington D.C. Meets Silicon Valley 
+ 
+[NC State University Bayes Hack Information] (https://cnr.ncsu.edu/geospatial/bayes-hack/)
