@@ -75,6 +75,7 @@
 					    <li><a href="#Facility Links" title="In this page: Facility Links" name="m">Facility Links</a></li>
 					    <li><a href="#Facility Events" title="In this page: Facility Events" name="m">Facility Events</a></li>
 					    <li><a href="#Facility Activities" title="In this page: Facility Activities" name="m">Facility Activities</a></li>
+					    <li><a href="#Facility Historical Reservations" title="In this page: Facility Historical Reservations" name="m">Facility Historical Reservations</a></li>
 			    	</ul>
 			    </li>
 			    <li><a href="#Campsites" title="In this page: Campsites" name="m">
@@ -87,6 +88,7 @@
 						<li><a href="#Get All Permitted Equipment for a Campsite" title="In this page: Get All Permitted Equipment for a Campsite" name="m">Get All Permitted Equipment for a Campsite</a></li>
 						<li><a href="#Get a Specific Permitted Equipment for a Specific Campsite" title="In this page: Get a Specific Permitted Equipment for a Specific Campsite" name="m">Get a Specific Permitted Equipment for a Specific Campsite</a></li>
 						<li><a href="#Get All Attributes for a Specific Campsite" title="In this page: Get All Attributes for a Specific Campsite" name="m">Get All Attributes for a Specific Campsite</a></li>
+						<li><a href="#Campsite Historical Reservations" title="In this page: Campsite Historical Reservations" name="m">Campsite Historical Reservations</a></li>
 			    	</ul>
 
 			    </li>
@@ -100,6 +102,7 @@
 						<li><a href="#Get all Zones for a Specific Permit Entrance" title="In this page: Get all Zones for a Specific Permit Entrance" name="m">Get all Zones for a Specific Permit Entrance</a></li>
 						<li><a href="#Get all Zones for a Specific Permit Entrance" title="In this page: Get all Zones for a Specific Permit Entrance" name="m">Get all Zones for a Specific Permit Entrance</a></li>
 						<li><a href="#Get All Attributes for a Specific Permit Entrance" title="In this page: Get All Attributes for a Specific Permit Entrance" name="m">Get All Attributes for a Specific Permit Entrance</a></li>
+						<li><a href="#Permit Entrance Historical Reservations" title="In this page: Permit Entrance Historical Reservations" name="m">Permit Entrance Historical Reservations</a></li>
 			    	</ul>
 			    </li>
 			    <li><a href="#Tours" title="In this page: Tours" name="m">
@@ -110,6 +113,7 @@
     					<li><a href="#Get All Tours for a Specific Facility" title="In this page: Get All Tours for a Specific Facility" name="m">Get All Tours for a Specific Facility</a></li>
 					    <li><a href="#Get a Specific Tour for a Specific Facility" title="In this page: Get a Specific Tour for a Specific Facility" name="m">Get a Specific Tour for a Specific Facility</a></li>
 					    <li><a href="#Get All Attributes for a Specific Tour" title="In this page: Get All Attributes for a Specific Tour" name="m">Get All Attributes for a Specific Tour</a></li>
+					    <li><a href="#Tour Historical Reservations" title="In this page: Tour Historical Reservations" name="m">Tour Historical Reservations</a></li>
 			    	</ul>
 			    </li>
 			    <li><a href="#Activities" title="In this page: Activities" name="m">
@@ -139,6 +143,13 @@
     					<li><a href="#Get a Specific Link Item" title="In this page: Get a Specific Link Item" name="m">Get a Specific Link Item</a></li>
 			    	</ul>
 			    </li>
+			     <li><a href="#Historical Reservations" title="In this page: Historical Reservations" name="m">
+			    	Historical Reservations</a> 
+			    	<ul>
+			    		<li><a href="#Get All Historical Reservations" title="In this page: Get All Historical Reservations name="m">Get All Historical Reservations</a></li>
+    					<li><a href="#Get a Specific Historical Reservation" title="In this page: Get a Specific Historical Reservation" name="m">Get a Specific Historical Reservation</a></li>
+			    	</ul>
+			    </li>
 			    <li><a href="#Errors" title="In this page: Errors" name="m">Errors</a></li>
 			    <li><a href="#Pagination" title="In this page: Pagination" name="m">Pagination</a></li>
 			    <li><a href="#Versioning" title="In this page: Versioning" name="m">Versioning</a></li>
@@ -166,6 +177,7 @@
 					    <li><a href="#Tour" title="In this page: Tour" name="m">Tour</a></li>
 					    <li><a href="#PermitEntrance" title="In this page: PermitEntrance" name="m">PermitEntrance</a></li>
 					    <li><a href="#Attribute" title="In this page: Attribute" name="m">Attribute</a></li>
+					    <li><a href="#Historical Reservation" title="In this page: Historical Reservation" name="m">Historical Reservation</a></li>
 					</ul>
 			    </li>
 			    <li><a href="#Federal Data Quality Information" title="In this page: Federal Data Quality Information" name="m">Federal Data Quality Information</a></li>
@@ -2101,7 +2113,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tr>
 </tbody></table>
 
-<p>This endpoint retrieves a specificfacility activity item.</p>
+<p>This endpoint retrieves a specific facility activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/{activityID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -2153,13 +2165,22 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tr>
 </tbody></table>
 
-          <h1 id='campsites'><a name='Campsites'></a>Campsites</h1>
+<h2 id='facility-historical-reservations'><a name='Facility Historical Reservations'></a>Facility Historical Reservations</h2>
+
+<p>This endpoint retrieves historical reservations for a specific facility. See <a href="#Historical Reservations">Historical Reservations</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/historicalreservations/</code></p>
+<br />
+<p>This endpoint retrieves a specific historical reservation for a specific facility. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/historicalreservations/{historicalreservationid}</code></p>
+
+<h1 id='campsites'><a name='Campsites'></a>Campsites</h1>
 <p>Campsites are associated to parent facilities. </p>
 
 <p><aside class="notice">
 The RIDB campsite resources only contain reservable campsites. First come, first serve campsites are not available at this time.
 </aside></p>
-
 
 </td>
 <td class="ResponseStyle" valign="top">
@@ -2400,6 +2421,16 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 </tr>
 </tbody></table>
 
+<h2 id='campsite-historical-reservations'><a name='Campsite Historical Reservations'></a>Campsite Historical Reservations</h2>
+
+<p>This endpoint retrieves historical reservations for a specific campsite. See <a href="#Historical Reservations">Historical Reservations</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}/historicalreservations/</code></p>
+<br />
+<p>This endpoint retrieves a specific historical reservation for a specific campsite. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/campsites/{campsiteID}/historicalreservations/{historicalreservationid}</code></p>
+
           <h1 id='permit-entrances'><a name='Permit Entrances'></a>Permit Entrances</h1>
 <p>Permit entrances are associated to parent facilities. </p>
 
@@ -2628,6 +2659,16 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <td>start record of overall result set</td>
 </tr>
 </tbody></table>
+
+<h2 id='permitentrance-historical-reservations'><a name='Permit Entrance Historical Reservations'></a>Permit Entrance Historical Reservations</h2>
+
+<p>This endpoint retrieves historical reservations for a specific permit entrance. See <a href="#Historical Reservations">Historical Reservations</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitentranceID}/historicalreservations/</code></p>
+<br />
+<p>This endpoint retrieves a specific historical reservation for a specific permit entrance. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/permitentrances/{permitentranceID}/historicalreservations/{historicalreservationid}</code></p>
 
           <h1 id='tours'><a name='Tours'></a>Tours</h1>
 <p>Tours are associated to parent facilities. Tours can also be members of parent tour packages as denoted by the &ldquo;membertours&rdquo; attribute.</p>
@@ -2884,6 +2925,17 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 </tr>
 </tbody></table>
 
+<h2 id='tour-historical-reservations'><a name='Tour Historical Reservations'></a>Tour Historical Reservations</h2>
+
+<p>This endpoint retrieves historical reservations for a specific tour. See <a href="#Historical Reservations">Historical Reservations</a> for more information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/tours/{tourID}/historicalreservations/</code></p>
+<br />
+<p>This endpoint retrieves a specific historical reservation for a specific tour. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/tours/{tourID}/historicalreservations/{historicalreservationid}</code></p>
+
+
           <h1 id='activities'><a name='Activities'></a>Activities</h1>
 <p>Activities are associated to recreation areas and facilities. Examples are climbing, boating, and camping.</p>
 <h2 id='get-all-activities'><a name='Get All Activities'></a>Get All Activities</h2>
@@ -3122,10 +3174,9 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 </tr>
 </tbody></table>
 
-          <h1 id='links'><a name='Links'></a>Links</h1>
-<p>Links are hyperlinks that provide information associated with a recreation area or facility. Link type examples are official websites, local partnerships, concessionaires, Flickr, Facebook, YouTube channels, Google+, and Twitter.</p>
-<h2 id='get-all-links'><a name='Get All Links'></a>Get All Links</h2>
 
+<h1 id='links'><a name='Links'></a>Links</h1>
+<p>Links are hyperlinks that provide information associated with a recreation area or facility. Link type examples are official websites, local partnerships, concessionaires, Flickr, Facebook, YouTube channels, Google+, and Twitter.</p>
 </td>
 <td class="ResponseStyle" valign="top">
 <blockquote>
@@ -3149,9 +3200,11 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 </td>
 </tr>
 
-
 <tr>
 <td valign="top" class="content">
+
+
+<h2 id='get-all-links'><a name='Get All Links'></a>Get All Links</h2>
 <p>This endpoint retrieves all links.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/links/</code></p>
@@ -3221,6 +3274,205 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 
 </td>
 </tr>
+
+
+<tr>
+<td valign="top" class="content">
+	<h1 id='errors'><a name="Historical Reservations"></a>Historical Reservations</h1>
+<p>Historical reservation data dates back to fiscal year 2006. </p>
+
+<h2 id='get-all-historical-reservations'><a name='Get All Historical Reservations'></a>Get All Historical Reservations</h2>
+<p>This endpoint retrieves all historical reservations.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1//historicalreservations/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>optional</td>
+<td>query filter criteria. Searches on title, description, and link type</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>numeric</td>
+<td>optional</td>
+<td>number of records to return (max 50)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>optional</td>
+<td>start record of overall result set</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Latitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Longitude of the point in decimal degrees</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Distance (in miles) by which to include search results</td>
+</tr>
+<tr>
+<td>orderdatemin</td>
+<td>date</td>
+<td>optional</td>
+<td>Minimum order date, returns all dates greater than the specified date</td>
+</tr>
+<tr>
+<td>orderdatemax</td>
+<td>date</td>
+<td>optional</td>
+<td>Maximum order date, returns dates less than the specified date</td>
+</tr>
+<tr>
+<td>reservationdatemin</td>
+<td>date</td>
+<td>optional</td>
+<td>Minimum reservation date, returns all dates greater than the specified date</td>
+</tr>
+<tr>
+<td>reservationdatemax</td>
+<td>date</td>
+<td>optional</td>
+<td>Date of maximum reservation date, returns dates less than the specified date</td>
+</tr>
+<tr>
+<td>usefeemin</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Minimum use fee</td>
+</tr>
+<tr>
+<td>usefeemax</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Maximum use fee</td>
+</tr>
+<tr>
+<td>totalpaidmin</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Minimum total paid</td>
+</tr>
+<tr>
+<td>totalpaidmax</td>
+<td>numeric</td>
+<td>optional</td>
+<td>Maximum total paid</td>
+</tr>
+
+
+</tbody></table>
+<h2 id='get-a-specific-link-item'><a name='Get a Specific Historical Reservation'></a>Get a Specific Historical Reservation</h2>
+<p>This endpoint retrieves a specific historical reservation.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/historicalreservations/{historicalReservationID}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>historicalReservationID</td>
+<td>numeric</td>
+<td>required</td>
+<td>the historical reservation ID</td>
+</tr>
+</tbody></table>
+
+</td>
+<td class="ResponseStyle" valign="top">
+<blockquote>
+<p>Example historical reservation JSON response</p>
+</blockquote>
+<pre class="highlight json">
+<span class="s2">{
+         "EntityType": "Site",
+         "CanoeKayak": "",
+         "Bicycle": "",
+         "FacilityLatitude": 44.7575,
+         "Truck": "",
+         "PowerBoat": "",
+         "RVMotorhome": "",
+         "OrgID": 126,
+         "StartDate": "2007-08-01",
+         "Park": "FISHERMENS BEND",
+         "Car": "",
+         "PickupCamper": "",
+         "Agency": "BLM",
+         "OrderDate": "2006-08-09",
+         "SmallTent": "",
+         "Tax": 0,
+         "HorseTrailer": "",
+         "ProductID": 142373,
+         "Van": "",
+         "BoatTrailer": "",
+         "TotalBeforeTax": 225,
+         "CustomerZIP": 97301,
+         "RegionDescription": "Cascades",
+         "Trailer": "",
+         "FacilityID": 234074,
+         "FacilityLongitude": -122.51027778,
+         "HistoricalReservationID": 852282,
+         "OrderNumber": "1-5317808",
+         "UseType": "Overnight",
+         "FacilityZIP": 97360,
+         "CustomerCountry": "USA",
+         "ParentLocationID": 74328,
+         "RegionCode": 84,
+         "Bus": "",
+         "Boat": "",
+         "FifthWheel": "",
+         "LargeTentOver9x12": "",
+         "CustomerState": "OR",
+         "ParentLocation": "Salem",
+         "SiteType": "GROUP STANDARD ELECTRIC",
+         "EndDate": "2007-08-04",
+         "Popup": "",
+         "Snowmobile": "",
+         "NumberOfPeople": 40,
+         "Tent": "",
+         "UseFee": 215,
+         "EntityID": 8905,
+         "Marinaboat": "",
+         "AttrFee": 0,
+         "CodeHierarchy": "|1|70901|74323|74328|74473|74081|",
+         "FacilityState": "OR",
+         "LegacyFacilityID": 74081,
+         "TranFee": 10,
+         "Motorcycle": "",
+         "TotalPaid": 225,
+         "OffRoadlAllTerrainVehicle": ""
+      }	</span>
+</pre>
+
+</td>
+</tr>
+
+
+
 
 
 <tr>
@@ -4652,6 +4904,270 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Attribute value</td>
 </tr>
 </tbody></table>
+
+<h2 id='attribute'><a name='Historical Reservation'></a>Historical Reservation</h2>
+<p>Historical Reservation data                               </p>
+
+<table>
+<thead>
+<tr>
+	<th>Field Name</th>
+	<th>Format</th>
+	<th>Length</th>
+	<th>Optional</th>
+	<th>Description</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>HistoricalReservationID</td>
+		<td>INT</td>
+		<td></td>
+		<td>N</td>
+		<td>The Historical Reservation ID</td>
+	</tr>	
+	<tr>
+		<td>OrgID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Organization ID</td>
+	</tr>	
+	<tr>
+		<td>EntityID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>The ID of the facility, campsite, tour, or permit entrance</td>
+	</tr>	
+	<tr>
+		<td>EntityType</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Campsite, Tour, or Permit Entrance</td>
+	</tr>	
+	<tr>
+		<td>FacilityID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>The Facility ID </td>
+	</tr>	
+	<tr>
+		<td>FacilityLatitude</td>
+		<td>DECIMAL</td>
+		<td></td>
+		<td>Y</td>
+		<td>The Facility Latitude</td>
+	</tr>	
+	<tr>
+		<td>FacilityLongitude</td>
+		<td>DECIMAL</td>
+		<td></td>
+		<td>Y</td>
+		<td>The Facility Longitude</td>
+	</tr>	
+	<tr>
+		<td>FacilityZIP</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>The Facility ZIP code</td>
+	</tr>	
+	<tr>
+		<td>FacilityState</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>The Facility State</td>
+	</tr>	
+	<tr>
+		<td>LegacyFacilityID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>The Legacy Facility ID</td>
+	</tr>
+	<tr>
+		<td>ProductID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>The product ID</td>
+	</tr>
+	<tr>
+		<td>StartDate</td>
+		<td>DATE</td>
+		<td></td>
+		<td>N</td>
+		<td>Order Start Date</td>
+	</tr>
+	<tr>
+		<td>EndDate</td>
+		<td>DATE</td>
+		<td></td>
+		<td>N</td>
+		<td>Order End Date</td>
+	</tr>
+	<tr>
+		<td>Park</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Park Name</td>
+	</tr>
+	<tr>
+		<td>Agency</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Agency Name</td>
+	</tr>
+	<tr>
+		<td>OrderDate</td>
+		<td>DATE</td>
+		<td></td>
+		<td>N</td>
+		<td>Reservation order date</td>
+	</tr>
+	<tr>
+		<td>OrderNumber</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Reservation number</td>
+	</tr>
+	<tr>
+		<td>TotalBeforeTax</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Total before tax</td>
+	</tr>
+	<tr>
+		<td>TotalPaid</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Total paid</td>
+	</tr>
+	<tr>
+		<td>UseFee</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Use fee</td>
+	</tr>
+	<tr>
+		<td>AttrFee</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Attribute fee</td>
+	</tr>
+	<tr>
+		<td>TranFee</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Transaction fee</td>
+	</tr>
+	<tr>
+		<td>Tax</td>
+		<td>FLOAT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Tax</td>
+	</tr>
+	<tr>
+		<td>SiteType</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Site type</td>
+	</tr>
+	<tr>
+		<td>NumberOfPeople</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Number of people</td>
+	</tr>
+	<tr>
+		<td>CustomerZIP</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Customer Zip</td>
+	</tr>
+	<tr>
+		<td>CustomerCountry</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Customer country</td>
+	</tr>
+	<tr>
+		<td>CustomerState</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Customer state</td>
+	</tr>
+	<tr>
+		<td>RegionDescription</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Region description</td>
+	</tr>
+	<tr>
+		<td>UseType</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Use type</td>
+	</tr>
+	<tr>
+		<td>ParentLocationID</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Parent location ID</td>
+	</tr>
+	<tr>
+		<td>ParentLocation</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Parent location</td>
+	</tr>
+	<tr>
+		<td>RegionCode</td>
+		<td>VARCHAR</td>
+		<td>50</td>
+		<td>Y</td>
+		<td>Region code</td>
+	</tr>
+	<tr>
+		<td>CodeHierarchy</td>
+		<td>VARCHAR</td>
+		<td>255</td>
+		<td>Y</td>
+		<td>Code hierarcy</td>
+	</tr>
+	<tr>
+		<td>Various Attributes</td>
+		<td>INT</td>
+		<td></td>
+		<td>Y</td>
+		<td>Possible values: HorseTrailer, CanoeKayak, Bicycle, Truck, PowerBoat, RVMotorhome, Car, PickupCamper, SmallTent, Van, BoatTrailer, Trailer, Bus, Boat, FifthWheel, LargeTentOver9x12, Popup, Snowmobile, Tent, Marinaboat, Motorcycle, OffRoadlAllTerrainVehicle</td>
+	</tr>
+</tbody>
+</table>
+
+
 
 <h1 id='federal-data-quality'><a name='Federal Data Quality Information'></a>Federal Data Quality Information</h1>
 
