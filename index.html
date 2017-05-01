@@ -3333,6 +3333,8 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 	<h1 id='errors'><a name="Historical Reservations"></a>Historical Reservations</h1>
 <p>Historical reservation data dates back to fiscal year 2006. </p>
 
+<p>* Disclaimer for the "CustomerZip" field in R1S Historical Reservation data: Zip code 92121 (San Diego, CA) has been used as a default for reservations tied to point of sales where customers' Recreation.gov profile information is not needed for the transaction (e.g., purchasing a bundle of firewood at a campground), and whether or not the customer is, or is not, from that zip code. Reservations using zip code 92121 are heavily inflated in volume and cannot be distinguished from reservations of customers who actually live in 92121. This anomaly skews results associated with assessing from where customer reservations originate.</p>
+
 <h2 id='get-all-historical-reservations'><a name='Get All Historical Reservations'></a>Get All Historical Reservations</h2>
 <p>This endpoint retrieves all historical reservations.</p>
 <h3 id='http-request'>HTTP Request</h3>
