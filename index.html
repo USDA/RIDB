@@ -181,8 +181,11 @@
 			    </li> -->
 
 
-			    <li><a href="#Errors" title="In this page: Errors" name="m">Errors</a></li>
-			    <li><a href="#Pagination" title="In this page: Pagination" name="m">Pagination</a></li>
+			    <li><a href="#Errors" title="In this page: Errors" name="m">Errors - HTTP Response Codes</a></li>
+				<li><a href="#dateformat" title="In this page: Date Formats" name="m">Date Formats</a></li>
+				<li><a href="#query" title="In this page: Query Param" name="m">Query Parameter</a></li>
+				<li><a href="#sort" title="In this page: Sorting" name="m">Sort RecAreas and Facilities</a></li>
+			    <li><a href="#Latlon" title="In this page: Latitude-Longitude" name="m">Latitude-Longitude</a></li>
 			    <li><a href="#Versioning" title="In this page: Versioning" name="m">Versioning</a></li>
 			    <li><a href="#Entity Relationship Diagram" title="In this page: Entity Relationship Diagram" name="m">Entity Relationship Diagram</a></li>
 			    <li><a href="#Data Dictionary" title="In this page: Data Dictionary" name="m">
@@ -192,22 +195,23 @@
 					    <li><a href="#OrgEntity" title="In this page: OrgEntity" name="m">OrgEntity</a></li>
 					    <li><a href="#RecArea" title="In this page: RecArea" name="m">RecArea</a></li>
 					    <li><a href="#Facility" title="In this page: Facility" name="m">Facility</a></li>
+						<li><a href="#RecAreaFacility" title="In this page: RecAreaFacility" name="m">RecAreaFacility</a></li>
 					    <li><a href="#EntityActivity" title="In this page: EntityActivity" name="m">EntityActivity</a></li>
-					    <li><a href="#RecAreaFacility" title="In this page: RecAreaFacility" name="m">RecAreaFacility</a></li>
 					    <li><a href="#RecreationalActivity" title="In this page: RecreationalActivity" name="m">RecreationalActivity</a></li>
 					    <li><a href="#RecAreaAddress" title="In this page: RecAreaAddress" name="m">RecAreaAddress</a></li>
 					    <li><a href="#FacilityAddress" title="In this page: FacilityAddress" name="m">FacilityAddress</a></li>
 					    <li><a href="#RecAreaEvent" title="In this page: RecAreaEvent" name="m"RecAreaEvent</a></li>
 					    <li><a href="#FacilityEvent" title="In this page: FacilityEvent" name="m">FacilityEvent</a></li>
 					    <li><a href="#Event" title="In this page: Event" name="m">Event</a></li>
-					    <li><a href="#RecAreaFacility" title="In this page: RecAreaFacility" name="m">RecAreaFacility</a></li>
-					    <li><a href="#EntityLink" title="In this page: EntityLink" name="m">EntityLink</a></li>
-					    <li><a href="#EntityMedia" title="In this page: EntityMedia" name="m">EntityMedia</a></li>
+					    <li><a href="#EntityLink" title="In this page: EntityLink" name="m">EntityLink - Link</a></li>
+					    <li><a href="#EntityMedia" title="In this page: EntityMedia" name="m">EntityMedia - Media</a></li>
 					    <li><a href="#Campsite" title="In this page: Campsite" name="m">Campsite</a></li>
 					    <li><a href="#PermittedEquipment" title="In this page: PermittedEquipment" name="m">PermittedEquipment</a></li>
 					    <li><a href="#Tour" title="In this page: Tour" name="m">Tour</a></li>
+						<li><a href="#MemberTour" title="In this page: Member Tour" name="m">Member Tour</a></li>
 					    <li><a href="#PermitEntrance" title="In this page: PermitEntrance" name="m">PermitEntrance</a></li>
 					    <li><a href="#Attribute" title="In this page: Attribute" name="m">Attribute</a></li>
+						<li><a href="#Zones" title="In this page: Zone" name="m">Zones</a></li>
 					    <li><a href="#Historical Reservation" title="In this page: Historical Reservation" name="mHistorical Reservation">Historical Reservation</a></li>
 					    <li><a href="#USFS Trail" title="In this page: USFS Trail" name="mUSFS Trail">USFS Trail</a></li>
 					    <li><a href="#FWS Trail" title="In this page: FWS Trail" name="mFWS Trail">FWS Trail</a></li>
@@ -287,6 +291,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 <h1 id='get-all-rec-area-data'><a name="Get All Rec Area Data"></a>Get All Rec Area Data</h1>
 <p>The RIDB is comprised of several data points, primarily recreation areas, facilities, campsites, tours, and permit entrances. While we offer many API endpoints to make this data available for download, you may be asking yourself &ldquo;How do I download the entire RIDB data set?&rdquo; We provide the ability to download the entire RIDB data set in one file. Download formats supported are zip file packages of JSON and CSV files. Visit the <a href='https://ridb.recreation.gov/?action=datadownload'>data download</a> page to view and download these file packages. </p>
+<p>RIDB IDs may change over time as Agencies Add and Delete recreational data.  Sub data such as addresses, media, links are more likely to to change as this data is updated more frequently.</p>
 
 <p><a href="#mGet All Rec Area Data" title="In this page: Menu - Get All Rec Area Data">Back to menu</a></p>
 
@@ -402,6 +407,19 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 
 		<h2 id='get-all-recreation-areas-for-a-specific-organization'><a name="Get All Recreation Areas for a Specific Organization"></a>Get All Recreation Areas for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
 		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas</code></p>
+		<h3 id='http-request'>HTTP Request with Query Param</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas?query=redrock</code></p>
+		<p>The Query param will search on the recarea name, description, keyword and stay limit fields</p>
+		<h3 id='http-request'>HTTP Request for FULL record set</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas?full=true</code></p>
+		<p>FULL=TRUE returns all sub data sets such as Facilities, Media, Links, Activities, etc.</p>
+		<h3 id='http-request'>HTTP Request for California RecAreas</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas?state=CA</code></p>
+		<h3 id='http-request'>HTTP Request for RecAreas with specific Activities</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas?activity=12,15,fishing</code></p>
+		<p>Note Activity parameter requires a comma delimited list of Activity IDs or keywords</p>
+		<h3 id='http-request'>HTTP Request with sort by lastupdated date</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/recareas?sort=date</code></p>
 		<h3 id='url-parameters'>URL Parameters</h3>
 		<table><thead>
 		<tr>
@@ -457,13 +475,19 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 		<td>activity</td>
 		<td>string</td>
 		<td>optional</td>
-		<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+		<td>comma delimited list of activity IDs or keyword(see <a href="#activities">activities</a>)</td>
 		</tr>
 		<tr>
 		<td>lastupdated</td>
 		<td>date</td>
 		<td>optional</td>
-		<td>return all records modified since this date</td>
+		<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
+		</tr>
+		<tr>
+		<td>sort</td>
+		<td>string</td>
+		<td>optional</td>
+		<td>sort the results by "ID", "Date" or "Name"</td>
 		</tr>
 		</tbody></table>
 		<p><a href="#mGet All Recreation Areas for a Specific Organization" title="In this page: Menu - Get All Recreation Areas for a Specific Organization">Back to menu</a></p>
@@ -495,6 +519,19 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 		<p><a href="#mGet a Specific Recreation Area for a Specific Organization" title="In this page: Menu - Get a Specific Recreation Area for a Specific Organization">Back to menu</a></p>
 		<h2 id='get-all-facilites-for-a-specific-organization'><a name='Get All Facilities for a Specific Organization'></a>Get All Facilities for a Specific Organization</h2><h3 id='http-request'>HTTP Request</h3>
 		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities</code></p>
+		<h3 id='http-request'>HTTP Request with a Query Param</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities?query=redrock</code></p>
+		<p>The Query param will search on the facility name, description, keyword and stay limit fields</p>
+		<h3 id='http-request'>HTTP Request for FULL record set</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities?full=true</code></p>
+		<p>FULL=TRUE returns all sub data sets such as Campsites, Tours, Media, Links, Activities, etc.</p>
+		<h3 id='http-request'>HTTP Request for California Facilities</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities?state=CA</code></p>
+		<h3 id='http-request'>HTTP Request for Facilities with specific Activities</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities?activity=12,15,fishing</code></p>
+<p>Note Activity parameter requires a comma delimited list of Activity IDs or keywords</p>
+		<h3 id='http-request'>HTTP Request Sort By Date</h3>
+		<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/organizations/{orgID}/facilities?sort=date</code></p>
 		<h3 id='url-parameters'>URL Parameters</h3>
 		<table><thead>
 		<tr>
@@ -550,13 +587,19 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 		<td>activity</td>
 		<td>string</td>
 		<td>optional</td>
-		<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+		<td>comma delimited list of activity IDs or keyword (see <a href="#activities">activities</a>)</td>
 		</tr>
 		<tr>
 		<td>lastupdated</td>
 		<td>date</td>
 		<td>optional</td>
-		<td>return all records modified since this date</td>
+		<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
+		</tr>
+		<tr>
+		<td>sort</td>
+		<td>string</td>
+		<td>optional</td>
+		<td>sort the results by "ID", "Date" or "Name"</td>
 		</tr>
 		</tbody></table>
 		
@@ -609,6 +652,20 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <p>This endpoint retrieves all recreation areas.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas</code></p>
+<h3 id='http-request'>HTTP Request with Query Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?query=redrock</code></p>
+<p>The Query param will search on the recarea name, description, keyword and stay limit fields</p>
+<h3 id='http-request'>HTTP Request for FULL record set</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?full=true</code></p>
+<p>FULL=TRUE returns all sub data sets such as Facilities, Media, Links, Activities, etc.</p>
+<h3 id='http-request'>HTTP Request for California RecAreas</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?state=CA</code></p>
+<h3 id='http-request'>HTTP Request for RecAreas with specific Activities</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?activity=12,15,fishing</code></p>
+<p>Note Activity parameter requires a comma delimited list of Activity IDs or keywords</p>
+<h3 id='http-request'>HTTP Request Sort By Date</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?sort=date</code></p>
+
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -670,13 +727,19 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <td>activity</td>
 <td>string</td>
 <td>optional</td>
-<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+<td>comma delimited list of activity IDs or keyword (see <a href="#activities">activities</a>)</td>
 </tr>
 <tr>
 <td>lastupdated</td>
 <td>date</td>
 <td>optional</td>
-<td>return all records modified since this date</td>
+<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string</td>
+<td>optional</td>
+<td>sort the results by "ID", "Date" or "Name"</td>
 </tr>
 </tbody></table>
 <h2 id='get-a-specific-recreation-area'><a name='Get a Specific Recreation Area'></a>Get a Specific Recreation Area</h2>
@@ -804,7 +867,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 <td>lastupdated</td>
 <td>date</td>
 <td>optional</td>
-<td>return all records modified since this date</td>
+<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1078,32 +1141,6 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 
-<p>Another endpoint to retrieve a specific recreation area media item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/media/{entityMediaID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>recAreaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the recreation area ID</td>
-</tr>
-<tr>
-<td>entityMediaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the media entity ID</td>
-</tr>
-</tbody></table>
-
 </td>
 <td class="ResponseStyle" valign="top">
 <blockquote>
@@ -1195,31 +1232,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 
-<p>Another endpoint to retrieve a specific recreation area link item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/links/{entityLinkID}/</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>recAreaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the recreation area ID</td>
-</tr>
-<tr>
-<td>entityLinkID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the entity link ID</td>
-</tr>
-</tbody></table>
+
 </td>
 <td class="ResponseStyle" valign="top">
 <blockquote>
@@ -1283,32 +1296,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tbody></table>
 
 <p>This endpoint retrieves a specific recreation area event item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/events/{entityEventID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>recAreaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the recreation area ID</td>
-</tr>
-<tr>
-<td>entityEventID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the entity event ID</td>
-</tr>
-</tbody></table>
 
-<p>Another endpoint to retrieve a specific recreation area event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/events/{eventID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -1440,32 +1428,7 @@ You must replace <code class="prettyprint">thisIsMyKey</code> with your personal
 </tr>
 </tbody></table>
 
-<p>Another endpoint to retrieve a specific recreation area activity item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas/{recAreaID}/activities/{activityID}/</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>recAreaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the recreation area ID</td>
-</tr>
-<tr>
-<td>activityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the activity ID</td>
-</tr>
-</tbody></table>
-          <h1 id='facilities'><a name='Facilities'></a>Facilities</h1>
+<h1 id='facilities'><a name='Facilities'></a>Facilities</h1>
 <p>Facilities are points of interest within recreations areas. Facilities can also &ldquo;stand on their own&rdquo; without a parent recreation area. Facilities can also be comprised of or more child facilities. Examples are a ranger station, hotel, campground or trail. Facilities can also be areas within larger facilities.
 Example is Alamo National Park that resides within the Alamo Lake recreation area. Facilities can also be reservable or non-reservable.</p>
 
@@ -1478,6 +1441,8 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
     </span><span class="s2">"ActivityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ActivityLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ActivityParentID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaActivityFeeDescription"</span><span class="p">:</span><span class="w"> </span><span class="mi">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RecAreaActivityDescription"</span><span class="p">:</span><span class="w"> </span><span class="mi">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ActivityName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIKING"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -1492,6 +1457,19 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <p>This endpoint retrieves all facilities.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities</code></p>
+<h3 id='http-request'>HTTP Request with a Query Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities?query=redrock</code></p>
+<p>The Query param will search on the facility name, description, keyword and stay limit fields</p>
+<h3 id='http-request'>HTTP Request for FULL record set</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities?full=true</code></p>
+<p>FULL=TRUE returns all sub data sets such as Campsites, Tours, Media, Links, Activities, etc.</p>
+<h3 id='http-request'>HTTP Request for California Facilities</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities?state=CA</code></p>
+<h3 id='http-request'>HTTP Request for Facilities with specific Activities</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities?activity=12,15,fishing</code></p>
+<p>Note Activity parameter requires a comma delimited list of Activity IDs or keywords</p>
+<h3 id='http-request'>HTTP Request Sort By Facility Name</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities?sort=name</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1553,13 +1531,19 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <td>activity</td>
 <td>string</td>
 <td>optional</td>
-<td>comma delimited list of activity IDs (see <a href="#activities">activities</a>)</td>
+<td>comma delimited list of activity IDs or keyword (see <a href="#activities">activities</a>)</td>
 </tr>
 <tr>
 <td>lastupdated</td>
 <td>date</td>
 <td>optional</td>
-<td>return all records modified since this date</td>
+<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string</td>
+<td>optional</td>
+<td>sort the results by "ID", "Date" or "Name"</td>
 </tr>
 </tbody></table>
 <h2 id='get-a-specific-facility'><a name='Get a Specific Facility'></a>Get a Specific Facility</h2>
@@ -1830,31 +1814,6 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tr>
 </tbody></table>
 
-<p>Another endpoint to retrieve a specific facility media item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/media/{entityMediaID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>facilityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the facility ID</td>
-</tr>
-<tr>
-<td>entityMediaID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the media entity ID</td>
-</tr>
-</tbody></table>
 
 </td>
 <td class="ResponseStyle" valign="top">
@@ -1948,30 +1907,7 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tbody></table>
 
 <p>Another endpoint to retrieve a specific facility link item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/links/{entityLinkID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>facilityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the facility ID</td>
-</tr>
-<tr>
-<td>entityLinkID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the link entity ID</td>
-</tr>
-</tbody></table>
+
 
 </td>
 <td class="ResponseStyle" valign="top">
@@ -2035,32 +1971,6 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 </tbody></table>
 
 <p>This endpoint retrieves a specific facility event item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/events/{entityEventID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>facilityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the facility ID</td>
-</tr>
-<tr>
-<td>entityEventID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the entity event ID</td>
-</tr>
-</tbody></table>
-
-<p>Another endpoint to retrieve a specific facility event item.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/events/{eventID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -2168,32 +2078,6 @@ Example is Alamo National Park that resides within the Alamo Lake recreation are
 <p>This endpoint retrieves a specific facility activity item.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/{activityID}</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>facilityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the facility ID</td>
-</tr>
-<tr>
-<td>activityID</td>
-<td>numeric</td>
-<td>required</td>
-<td>the activity ID</td>
-</tr>
-</tbody></table>
-
-<p>Another endpoint to retrieve a specific facility activity item.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilities/{facilityID}/activities/{activityID}/</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2502,6 +2386,9 @@ The RIDB campsite resources only contain reservable campsites. First come, first
     </span><span class="s2">"Loop"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOOP C - Sites 1,2,3,4, 45-99"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"CampsiteAccessible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"FacilityID"</span><span class="p">:</span><span class="w"> </span><span class="mi">232446</span><span class="w">
+    </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="mi">[]</span><span class="w">
+    </span><span class="s2">"PermittedEquipment"</span><span class="p">:</span><span class="w"> </span><span class="mi">[]</span><span class="w">
+    </span><span class="s2">"EntityMedia"</span><span class="p">:</span><span class="w"> </span><span class="mi">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
@@ -3388,25 +3275,25 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <td>orderdatemin</td>
 <td>date</td>
 <td>optional</td>
-<td>Minimum order date, returns all dates greater than the specified date</td>
+<td>Minimum order date, returns all dates greater than the specified date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 <tr>
 <td>orderdatemax</td>
 <td>date</td>
 <td>optional</td>
-<td>Maximum order date, returns dates less than the specified date</td>
+<td>Maximum order date, returns dates less than the specified date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 <tr>
 <td>reservationdatemin</td>
 <td>date</td>
 <td>optional</td>
-<td>Minimum reservation date, returns all dates greater than the specified date</td>
+<td>Minimum reservation date, returns all dates greater than the specified date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 <tr>
 <td>reservationdatemax</td>
 <td>date</td>
 <td>optional</td>
-<td>Date of maximum reservation date, returns dates less than the specified date</td>
+<td>Date of maximum reservation date, returns dates less than the specified date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 <tr>
 <td>usefeemin</td>
@@ -3535,6 +3422,14 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <p>This endpoint retrieves all US Forest Service trails.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/USFS/</code></p>
+<h3 id='http-request'>HTTP Request with Query Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/USFS/?query=iron mine</code></p>
+<h3 id='http-request'>HTTP Request with Miles Params</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/USFS/?milesmin=10&milesmax=15</code></p>
+<h3 id='http-request'>HTTP Request with Lat - Long Params</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/USFS/?latitude=40.29&longitude=-83.03$radius=25</code></p>
+<h3 id='http-request'>HTTP Request with Last Updated Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/USFS/?lastupdatedate=9-12-17</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -3596,7 +3491,7 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <td>lastupdated</td>
 <td>date</td>
 <td>optional</td>
-<td>return all records modified since this date</td>
+<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 </tbody></table>
 
@@ -3707,6 +3602,14 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <p>This endpoint retrieves all FWS trails.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/FWS/</code></p>
+<h3 id='http-request'>HTTP Request with Query Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/FWS/?query=iron mine</code></p>
+<h3 id='http-request'>HTTP Request with Miles Params</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/FWS/?milesmin=10&milesmax=15</code></p>
+<h3 id='http-request'>HTTP Request with Lat - Long Params</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/FWS/?latitude=40.29&longitude=-83.03$radius=25</code></p>
+<h3 id='http-request'>HTTP Request with Last Updated Param</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/trails/FWS/?lastupdatedate=9-12-17</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 
 <table><thead>
@@ -3757,7 +3660,7 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <td>lastupdated</td>
 <td>date</td>
 <td>optional</td>
-<td>return all records modified since this date</td>
+<td>return all records modified since this date (see <a href="#dateformat">Date Formats</a>)</td>
 </tr>
 </tbody></table>
 
@@ -4618,12 +4521,12 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 <tr>
 <td valign="top" class="content">
 
-          <h1 id='errors'><a name="Errors"></a>Errors</h1>
-<p>The RIDB API uses the following error codes:</p>
+          <h1 id='errors'><a name="Errors"></a>Errors - HTTP Response Codes</h1>
+<p>The RIDB API uses the following error/HTTP Reponse codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Response Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
@@ -4649,7 +4552,60 @@ The RIDB campsite resources only contain reservable campsites. First come, first
 </tr>
 </tbody></table>
 
-          <h1 id='pagination'><a name='Pagination'></a>Pagination</h1>
+<h1 id='dateformat'><a name='Dateformat'></a>Date Formats</h1>
+<p>The date format required for the API is:</p>
+
+<ul>
+<li>mm-dd-yyyy, month-day-year.  ( 01-23-2017 )</li>
+</ul>
+
+<h1 id='query'><a name='query'></a>Query Parameter</h1>
+<p>For specific endpoint collections the RIDB has an optional parameter, QUERY.</p>
+
+<h3 id='http-request'>HTTP Request Searching RecAreas for "Yosemite"</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?query=yosemite</code></p>
+<h3 id='http-request'>HTTP Request Searching RecAreas for "Creek"</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?query=creek</code></p>
+<h3 id='http-request'>HTTP Request Searching Facilities for "Pavilion"</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilties?query=pavilion</code></p>
+
+<h1 id='sort'><a name='sort'></a>Sorting RecAreas and Facilities</h1>
+<p>For RecArea and Facility collections there is an optional sort parameter.</p>
+<ul>
+<li>ID: Sort by RecArea or Facility ID (Default)</li>
+<li>Name: Sort by RecArea or Facility Name</li>
+<li>Date: Sort by the lastupdated date in reverse chronological order</li>
+</ul>
+
+<h3 id='http-request'>HTTP Request Sort RecArea by Last Updated Date</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?sort=date</code></p>
+<h3 id='http-request'>HTTP Request Sort RecArea by RecArea ID</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?sort=id</code></p>
+<h3 id='http-request'>HTTP Request Sort RecArea by Facility Name</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/facilties?sort=name</code></p>
+
+<h1 id='latlon'><a name='latlon'></a>Latitude - Longitude</h1>
+<p>For specific endpoints the RIDB API allows searching by latitude and longitude.  These values must be in decimal degress.  An optional 
+	radius parameter, specified in miles, can be use or will be set to the default of 50 miles</p>
+
+<ul>
+<li>Latitude: -90.0 to 90.0</li>
+<li>Longitude: -180.0 to 180.0</li>
+<li>Radius: Positive Integer in Miles</li>
+</ul>
+
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?latitude=37.8&longitude=-119.53&radius=75</code></p>
+
+<ul>
+<li>Latitude: Alternate Parameter Lat</li>
+<li>Longitude: Alternate Parameter Lon or Long</li>
+</ul>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://ridb.recreation.gov/api/v1/recareas?lat=37.8&lon=-119.53&radius=75</code></p>
+
+
+<h1 id='pagination'><a name='Pagination'></a>Pagination</h1>
 <p>The RIDB API uses cursor based pagination with the parameters &ldquo;offset&rdquo; and &ldquo;limit&rdquo;. </p>
 
 <ul>
@@ -4750,6 +4706,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Y</td>
 <td>Organization jurisdiction type</td>
 </tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Date Record was last updated</td>
+</tr>
 </tbody></table>
 
 <h2 id='recarea'><a name='OrgEntity'></a>OrgEntity</h2>
@@ -4785,6 +4748,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>N</td>
 <td>The organization ID</td>
 </tr>
+
 </tbody>
 </table>
 
@@ -4813,7 +4777,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>INT</td>
 <td></td>
 <td>Y</td>
-<td>The agency's internal Recreation Area ID</td>
+<td>The agency's internal Recreation Area ID provided to the RIDB by the agency</td>
 </tr>
 <tr>
 <td>RecAreaName</td>
@@ -4899,6 +4863,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Y</td>
 <td>Details on the stay limits for the recreational area</td>
 </tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Date Record was last updated</td>
+</tr>
 </tbody></table>
 <h2 id='facility'><a name='Facility'></a>Facility</h2>
 <p>Facility records (e.g. Yellowstone Group Campground, Barnum Whitewater Area)                                </p>
@@ -4924,7 +4895,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>INT</td>
 <td></td>
 <td>N</td>
-<td>The agency's internal Facility ID</td>
+<td>The agency's internal Facility ID provided to the RIDB by the agency</td>
 </tr>
 <tr>
 <td>FacilityName</td>
@@ -5031,9 +5002,46 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Y</td>
 <td>Details on the stay limits for the facility</td>
 </tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Date Record was last updated</td>
+</tr>
 </tbody></table>
+
+<h2 id='recareafacility'><a name='RecAreaFacility'></a>RecAreaFacility</h2>
+<p>Joins parent recreation areas to child facilities</p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RecAreaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: RecArea RecAreaID</td>
+</tr>
+<tr>
+<td>FacilityID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Foreign Key: Facility FacilityID</td>
+</tr>
+</tbody>
+</table>
+
 <h2 id='entityactivity'><a name='EntityActivity'></a>EntityActivity</h2>
-<p>Joins recreation areas and facilities to associated activities                             </p>
+<p>Joins recreation areas and facilities to associated activities and includes more information about an activity at the facility or recarea.</p>
 
 <table><thead>
 <tr>
@@ -5066,6 +5074,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Foreign Key: RecreationalActivity ActivityID</td>
 </tr>
 <tr>
+<td>ActivityParentID</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>ParentID of the related Actitvity</td>
+</tr>
+<tr>
 <td>ActivityDescription</td>
 <td>STRING</td>
 <td>1024</td>
@@ -5081,39 +5096,8 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 </tr>
 </tbody></table>
 
-
-<h2 id='recareafacility'><a name='RecAreaFacility'></a>RecAreaFacility</h2>
-<p>Joins parent recreation areas to child facilities</p>
-
-<table><thead>
-<tr>
-<th>Field Name</th>
-<th>Format</th>
-<th>Length</th>
-<th>Optional</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>RecAreaID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: RecArea RecAreaID</td>
-</tr>
-<tr>
-<td>FacilityID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: Facility FacilityID</td>
-</tr>
-</tbody>
-</table>
-
-
-<h2 id='recreationalactivity'><a name='RecreationalActivity'></a>RecreationalActivity</h2>
-<p>List of all activities                              </p>
+<h2 id='recreationalactivity'><a name='RecreationalActivity'></a>RecreationalActivity or Activity</h2>
+<p>List of all activities available in the RIDB.  RecreationalActivity or Activity can be used interchangeably</p>
 
 <table><thead>
 <tr>
@@ -5130,6 +5114,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td></td>
 <td>N</td>
 <td>Activity ID</td>
+</tr>
+<tr>
+<td>ActivityParentID</td>
+<td>INT</td>
+<td></td>
+<td>Y</td>
+<td>ParentID of the related Actitvity</td>
 </tr>
 <tr>
 <td>ActivityName</td>
@@ -5227,6 +5218,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>20</td>
 <td>Y</td>
 <td>Address Type for the recreational area</td>
+</tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Date Record was last updated</td>
 </tr>
 </tbody></table>
 <h2 id='facilityaddress'><a name='FacilityAddress'></a>FacilityAddress</h2>
@@ -5553,35 +5551,16 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Y</td>
 <td>Class and type of sponsor</td>
 </tr>
+<tr>
+<td>LastUpdatedDate</td>
+<td>DATETIME</td>
+<td></td>
+<td>N</td>
+<td>Date Record was last updated</td>
+</tr>
 </tbody></table>
-<h2 id='recareafacility'><a name='RecAreaFacility'></a>RecAreaFacility</h2>
-<p>Joins recreation areas to associated facilities                             </p>
 
-<table><thead>
-<tr>
-<th>Field Name</th>
-<th>Format</th>
-<th>Length</th>
-<th>Optional</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>RecAreaID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: RecArea RecAreaID</td>
-</tr>
-<tr>
-<td>FacilityID</td>
-<td>INT</td>
-<td></td>
-<td>N</td>
-<td>Foreign Key: Facility FacilityID</td>
-</tr>
-</tbody></table>
-<h2 id='entitylink'><a name='EntityLink'></a>EntityLink</h2>
+<h2 id='entitylink'><a name='EntityLink'></a>EntityLink - Link</h2>
 <p>Hyperlink to an external site (e.g. Agency site, Facebook, Twitter)                             </p>
 
 <table><thead>
@@ -5593,6 +5572,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>EntityLinkID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Primary Key</td>
+</tr>
 <tr>
 <td>EntityType</td>
 <td>STRING</td>
@@ -5636,7 +5622,7 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>Text description of the entity link</td>
 </tr>
 </tbody></table>
-<h2 id='entitymedia'><a name='EntityMedia'></a>EntityMedia</h2>
+<h2 id='entitymedia'><a name='EntityMedia'></a>EntityMedia - Media</h2>
 <p>Media links (e.g. images, video)                                </p>
 
 <table><thead>
@@ -5648,6 +5634,13 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>MediaID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Primary Key</td>
+</tr>
 <tr>
 <td>EntityType</td>
 <td>STRING</td>
@@ -5801,6 +5794,27 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>N</td>
 <td>Record last update date</td>
 </tr>
+<tr>
+<td>Attributes</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Array of Campsite Attributes</td>
+</tr>
+<tr>
+<td>PermittedEquipment</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Array of Permitted Equipment allowed in the campsite</td>
+</tr>
+<tr>
+<td>EntityMedia</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Array of Media for the campsite</td>
+</tr>
 </tbody></table>
 <h2 id='permittedequipment'><a name='PermittedEquipment'></a>PermittedEquipment</h2>
 <p>Permitted Equipment associated to campsites (e.g. tent, trailer)                                </p>
@@ -5904,7 +5918,50 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>N</td>
 <td>Record last update date</td>
 </tr>
+<tr>
+<td>Attributes</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Array of Attributes for the tour</td>
+</tr>
+<tr>
+<td>EntityMedia</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Media records for Tour</td>
+</tr>
+<tr>
+<td>Membertours</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Tour IDs of associated or multi-part Tours</td>
+</tr>
 </tbody></table>
+
+<h2 id='membertour'><a name='MemberTour'></a>Member Tour</h2>
+<p>Related or Multi-part Tours</p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MemberTourID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Tour ID of associated or multi-part Tour</td>
+</tr>
+</tbody></table>
+
 <h2 id='permitentrance'><a name='PermitEntrance'></a>PermitEntrance</h2>
 <p>Permit entrance records                             </p>
 
@@ -6008,6 +6065,21 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 <td>N</td>
 <td>Record last update date</td>
 </tr>
+<tr>
+<td>Attributes</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Attributes related to the Permit</td>
+</tr>
+<tr>
+<td>Zones</td>
+<td>ARRAY</td>
+<td></td>
+<td>Y</td>
+<td>Additional Zone information related to the Permit</td>
+</tr>
+
 </tbody></table>
 <h2 id='attribute'><a name='Attribute'></a>Attribute</h2>
 <p>Attributes associated to campsites, tours, and permit entrances (e.g. checkout time, shade, water hookup)                               </p>
@@ -6022,10 +6094,52 @@ Reminder, the offset parameter is <a href="http://en.wikipedia.org/wiki/Zero-bas
 </tr>
 </thead><tbody>
 <tr>
+<td>AttributeID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Attribute ID</td>
+</tr>
+<tr>
 <td>AttributeName</td>
 <td>STRING</td>
 <td>60</td>
 <td>Y</td>
+<td>Attribute name</td>
+</tr>
+<tr>
+<td>AttributeValue</td>
+<td>STRING</td>
+<td>255</td>
+<td>Y</td>
+<td>Attribute value</td>
+</tr>
+</tbody></table>
+
+<h2 id='zones'><a name='Zones'></a>Zones</h2>
+<p>Zones related to a Permit Entrance Record</p>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Format</th>
+<th>Length</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PermitEntranceZoneID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
+<td>Attribute ID</td>
+</tr>
+<tr>
+<td>PermitEntranceID</td>
+<td>INT</td>
+<td></td>
+<td>N</td>
 <td>Attribute name</td>
 </tr>
 <tr>
